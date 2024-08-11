@@ -1,0 +1,217 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+  background-color: #f8f9fa;
+  line-height: 1.6;
+}
+
+.single-product {
+  margin-top: 40px;
+}
+
+.product-image {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, .1);
+}
+
+
+
+.small-img-row {
+  margin-top: 20px;
+}
+
+.small-img-col {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.small-img-col:hover {
+  transform: scale(1.05);
+}
+
+.small-img {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+  border: 1px solid #000;
+}
+
+.product-details h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.product-price {
+  font-size: 1.8rem;
+  color: #ff523b;
+  margin-bottom: 20px;
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: #aaa;
+}
+
+.size-select,
+.quantity-input {
+  margin-bottom: 20px;
+}
+
+.quantity-input input {
+  width: 60px;
+}
+
+.btn-add-to-cart {
+  background-color: #ff523b;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn-add-to-cart:hover {
+  background-color: #e64a2e;
+}
+
+.buttons-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.product-description {
+  margin-top: 30px;
+}
+
+.related-products {
+  margin-top: 60px;
+}
+
+.related-product-card {
+  transition: transform 0.3s ease;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, .1);
+}
+
+.related-product-card img {
+  height: 250px;
+  object-fit: cover;
+}
+
+.related-product-card:hover {
+  transform: translateY(-5px);
+}
+
+.card-title {
+  font-size: 1rem;
+  color: #333;
+}
+
+.rating {
+  color: #ffcc00;
+}
+
+.size-chart {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.size-chart .size-options {
+  display: flex;
+  gap: 10px;
+}
+
+.size-chart .size-options button {
+  padding: 10px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.size-chart .size-options button.active {
+  background-color: #ff523b;
+  color: white;
+  border: none;
+}
+
+.size-chart .size-options button:hover {
+  background-color: #e64a2e;
+  color: white;
+}
+
+.size-chart .size-chart-link {
+  font-size: 0.9rem;
+  color: #ff523b;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .product-details h1 {
+      font-size: 2rem;
+  }
+
+  .product-price {
+      font-size: 1.5rem;
+  }
+
+  .size-chart {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .size-chart .size-chart-link {
+      margin-top: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .product-details h1 {
+      font-size: 1.5rem;
+      padding-top: 20px;
+  }
+
+  .product-price {
+      font-size: 1.2rem;
+  }
+
+  .size-chart .size-options button {
+      width: 30px;
+      height: 30px;
+      font-size: 0.8rem;
+  }
+
+  .size-chart .size-chart-link {
+      font-size: 0.8rem;
+  }
+}
+
+.product-description p {
+  text-align: justify;
+}
+
+.size-chart .size-chart-link a {
+  color: #007bff;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+#ProductImg {
+  max-width: 100%;
+  height: auto;
+  max-height: 300px; /* You can adjust this value */
+  object-fit: contain; /* Adjust the object-fit property as needed */
+}
+

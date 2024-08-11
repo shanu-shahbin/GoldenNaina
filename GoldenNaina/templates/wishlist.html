@@ -1,0 +1,79 @@
+{% extends 'partials/base.html' %}
+
+{% block title %}Wishlist{% endblock %}
+{% load static %}
+{% block content %}
+
+<div class="wishlist-container">
+    <div class="wishlist-header">
+        <h1>My Wishlist</h1>
+        <p>{{ wishlist|length }} items</p>
+    </div>
+    <section class="wishlist-products">
+        {% for w in wishlist %}
+        {% if w.product.id %}
+        <div class="wishlist-product">
+            <a href="{% url 'product_detail' w.product.id %}">
+                <img src="{{ w.product.image.url }}" alt="{{ w.product.title }}" class="wishlist-product-image">
+            </a>
+            <div class="wishlist-product-info">
+                <p class="wishlist-brand">{{ w.product.title }}</p>
+                <p class="wishlist-description">{{ w.product.description }}</p>
+                <p class="wishlist-price">AED {{ w.product.discount_price }}</p>
+                <p class="wishlist-discount">({{ w.product.get_percentage }}% OFF)</p>
+                <div class="wishlist-buttons">
+                    <a href="#" class="wishlist-remove button" data-product-item="{{ w.product.id }}">Remove</a>
+                    <a href="{% url 'product_detail' w.product.id %}" class="wishlist-add-to-bag button">View More</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% empty %}
+        <div class="wishlist-empty">
+            <h2>Your wishlist is empty</h2>
+        </div>
+        {% endfor %}
+    </section>
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $(document).on('click', ".wishlist-remove", function (){
+            var product_id = $(this).data("product-item");
+            var csrftoken = getCookie('csrftoken');
+            
+            $.ajax({
+                url: "{% url 'remove-from-wishlist' %}",
+                data: { id: product_id },
+                dataType: "json",
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                },
+                success: function(response) {
+                    if (response.bool === true) {
+                        $('a[data-product-item="'+ product_id +'"]').closest('.wishlist-product').remove();
+                    }
+                }
+            });
+        });
+    });
+
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+</script>
+{% endblock %}

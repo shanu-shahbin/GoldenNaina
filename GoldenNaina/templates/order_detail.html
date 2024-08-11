@@ -1,0 +1,217 @@
+{% load static %}
+{% load getstatus %}
+{% load return %}  <!-- Ensure this is here -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .order-details, .return-status, .address-details {
+            margin-bottom: 30px;
+        }
+        .order-details div, .return-status div, .address-details div {
+            margin-bottom: 10px;
+        }
+        .return-button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .return-button:hover {
+            background-color: #c0392b;
+        }
+        .product-details-header {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .product-details {
+            display: flex;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 4px;
+        }
+        .product-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+        .product-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .product-info {
+            font-size: 0.9em;
+            color: #666;
+        }
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #3498db;
+            left: 50%;
+            margin-left: -1px;
+        }
+        .timeline-step {
+            padding: 20px 30px;
+            position: relative;
+            background: inherit;
+            width: 50%;
+        }
+        .timeline-step-left {
+            left: 0;
+        }
+        .timeline-step-right {
+            left: 50%;
+        }
+        .timeline-content {
+            padding: 20px 30px;
+            background: #fff;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .timeline-content h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        .timeline-content::after {
+            content: '';
+            position: absolute;
+            border-style: solid;
+            width: 0;
+            height: 0;
+            top: 30px;
+            right: -15px;
+            border-width: 10px 0 10px 15px;
+            border-color: transparent transparent transparent #fff;
+        }
+        .timeline-step-right .timeline-content::after {
+            left: -15px;
+            border-width: 10px 15px 10px 0;
+            border-color: transparent #fff transparent transparent;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Order Details</h2>
+    <!-- Order Details -->
+    <div class="order-details">
+        <div><strong>Order ID:</strong> {{ order.id }}</div>
+        <div><strong>Date:</strong> {{ order.created_at }}</div>
+        <div><strong>Status:</strong> {% getstatus order.order_status %}</div>
+        <div><strong>Total Price:</strong> ${{ order.total_price }}</div>
+    </div>
+
+    <!-- Return Status -->
+    <div class="return-status">
+        
+        {% if order.order_status == order.ORDER_DELIVERED and order.is_within_return_period and not order.is_refund_requested %}
+        <form action="{% url 'return_order' order.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="return-button">Request Return</button>
+        </form>
+        {% elif order.return_status %}
+        <div><strong>Return Status Details:</strong> {% get_return_status order.return_status %}</div>
+        {% endif %}
+    </div>
+
+    <!-- Shipping Address -->
+    <div class="address-details">
+        <div><strong>Shipping Address:</strong></div>
+        <div>{{ order.address.name }}, {{ order.address.street }}, {{ order.address.city }}</div>
+        <div>{{ order.address.state }}, {{ order.address.zip_code }}</div>
+        <div>{{ order.address.country }}</div>
+    </div>
+
+    <!-- Product Details -->
+    <div class="product-details-header"><strong>Products:</strong></div>
+    {% for item in order.added_items.all %}
+        <div class="product-details">
+            <img src="{{ item.product.image.url }}" alt="Product Image" class="product-image">
+            <div>
+                <div class="product-title">{{ item.product.title }}</div>
+                <div class="product-info">Size: {{ item.size }}</div>
+                <div class="product-info">Quantity: {{ item.quantity }}</div>
+                <div class="product-info">Price: ${{ item.product_price }}</div>
+            </div>
+        </div>
+    {% endfor %}
+
+    <!-- Timeline -->
+    <div class="timeline">
+        <div class="timeline-step timeline-step-left">
+            <div class="timeline-content">
+                <h3>Order Placed</h3>
+                <p>{{ order.created_at }}</p>
+            </div>
+        </div>
+        <div class="timeline-step timeline-step-right">
+            <div class="timeline-content">
+                <h3>Order Confirmed</h3>
+                <p>{% getstatus_time order order.ORDER_CONFIRM %}</p>
+            </div>
+        </div>
+        <div class="timeline-step timeline-step-left">
+            <div class="timeline-content">
+                <h3>Order Processed</h3>
+                <p>{% getstatus_time order order.ORDER_PROCESSED %}</p>
+            </div>
+        </div>
+        <div class="timeline-step timeline-step-right">
+            <div class="timeline-content">
+                <h3>Order Delivered</h3>
+                <p>{% getstatus_time order order.ORDER_DELIVERED %}</p>
+            </div>
+        </div>
+        {% if order.order_status == order.ORDER_CANCELLED %}
+        <div class="timeline-step timeline-step-left">
+            <div class="timeline-content">
+                <h3>Order Cancelled</h3>
+                <p>{% getstatus_time order order.ORDER_CANCELLED %}</p>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+</body>
+</html>

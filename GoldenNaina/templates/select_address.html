@@ -1,0 +1,24 @@
+{% extends 'partials/base.html' %}
+
+{% block content %}
+<h2>Select Address</h2>
+<form method="post">
+    {% csrf_token %}
+    <ul>
+        {% for address in addresses %}
+        <li>
+            <input type="radio" name="address" value="{{ address.id }}" id="address_{{ address.id }}">
+            <label for="address_{{ address.id }}">{{ address.name}}{{ address.street }}, {{ address.city }}, {{ address.emirates}},{{ address.zip_code }}</label>
+        </li>
+        {% endfor %}
+    </ul>
+    <button type="submit" name="select_address">Continue to Checkout</button>
+</form>
+
+<h2>Add New Address</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" name="add_address">Add Address</button>
+</form>
+{% endblock %}

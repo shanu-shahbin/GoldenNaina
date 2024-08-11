@@ -1,0 +1,15 @@
+{% extends "partials/base.html" %}
+{% block content %}
+  <h2>Order Review</h2>
+  <ul>
+    {% for item in order.added_items.all %}
+      <li>{{ item.product.title }} - {{ item.quantity }}</li>
+    {% endfor %}
+  </ul>
+  <p>Delivery Address: {{ address.full_address }}</p>
+  <form method="post" action="{% url 'checkout' %}">
+    {% csrf_token %}
+    <input type="hidden" name="total" value="{{ order.total_price }}">
+    <button type="submit">Proceed to Payment</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,26 @@
+<!-- templates/tags.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ tag.name }}</title>
+</head>
+<body>
+    <h1>Products tagged with "{{ tag.name }}"</h1>
+    
+    {% if products %}
+        <ul>
+            {% for product in products %}
+                <li>
+                    <h2>{{ product.name }}</h2>
+                    <p>{{ product.description }}</p>
+                    <p>Priority: {{ product.priority }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No products found for this tag.</p>
+    {% endif %}
+    
+</body>
+</html>

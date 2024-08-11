@@ -1,0 +1,45 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="dashboard-container">
+    
+    <div class="dashboard-content">
+        <span>
+            {% if profile.image %}
+            <img src="{{ profile.image.url }}" class="profile-image">
+            {% else %}
+            <img src="{% static 'images/logo.svg' %}" class="profile-image" alt="Default Profile Image">
+            {% endif %}
+        </span>
+        <form method="post" enctype="multipart/form-data" class="profile-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_full_name">Full Name:</label>
+                {{ form.full_name }}
+            </div>
+            <div class="form-group">
+                <label for="id_bio">Bio:</label>
+                {{ form.bio }}
+            </div>
+            <div class="form-group">
+                <label for="id_phone">Phone:</label>
+                {{ form.phone }}
+            </div>
+            <div class="form-group">
+                <label for="id_image">Profile Image:</label>
+                {{ form.image }}
+            </div>
+            <button type="submit" class="update-button">Update Profile</button>
+        </form>
+        <div class="verification-status">
+            {% if profile.verified %}
+            <span class="verified">Verified<i class="fa fa-check" aria-hidden="true"></i></span>
+            {% else %}
+            <span class="not-verified">Not Verified<i class="fa fa-times" aria-hidden="true"></i></span>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

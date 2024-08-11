@@ -1,0 +1,116 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block title %}Product details{% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="container">
+
+    <!-- Single Products -->
+    <div class="container single-product">
+        <div class="row">
+            <div class="col-lg-6">
+                <img src="{{ product.image.url }}" class="img-fluid product-image" id="ProductImg">
+                <div class="row small-img-row">
+                    {% for p in p_images %}
+                    <div class="col-3 small-img-col">
+                        <img src="{{ p.images.url }}" class="img-fluid small-img">
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-lg-6 product-details">
+                <h1>{{ product.title }}</h1>
+                <h4 class="product-price">${{ product.discount_price }}&nbsp;<sm class="old-price">${{ product.price }}</sm>&nbsp;( {{ get_percentage }}% off )</h4>
+                <p class="product-description">{{ product.description }}</p>
+                <p>{{ product.get_average_rating_stars }}</p>
+                <form action="{% url 'add_to_cart' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" name="product_id" value="{{ product.id }}">
+
+                    <div class="size-chart">
+                        <div class="size-options">
+                            {% for stock in stocks %}
+                            <button type="button" class="size-btn" data-size="{{ stock.size.name }}" data-quantity="{{ stock.quantity }}" required>{{ stock.size.name }} ({{ stock.quantity }})</button>                           
+                             {% endfor %}
+                        </div>
+                        <div class="size-chart-link"><a href="{% url 'size-chart' %}">Size Chart</a></div>
+                    </div>
+
+                    <input type="hidden" name="size" id="selectedSize" value="" required>
+
+                    <div class="form-group quantity-input">
+                        <input type="number" name="quantity" value="1" min="1" class="form-control" id="quantityInput" required>
+                    </div>
+                    <div class="buttons-row">
+                        <button type="submit" class="btn btn-add-to-cart">Add To Cart</button>
+                        <a href="{% url 'reviews' product.id %}" class="btn btn-outline-secondary">Reviews</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Related Products -->
+    <div class="container related-products">
+        <h2 class="text-center mb-4">Related Products</h2>
+        <div class="row">
+            {% for p in products %}
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="card related-product-card">
+                    <a href="{% url 'product_detail' p.id %}">
+                        <img src="{{ p.image.url }}" class="card-img-top" alt="product image"></a>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ p.title|truncatechars:50 }}</h5>
+                        <div class="rating">
+                            <span>
+                                {% for i in ''|ljust:product.rating %}
+                                    ★
+                                {% endfor %}
+                            </span>    
+                        </div>
+                        <p class="card-text">$&nbsp;<big><strong>{{ p.discount_price }}</big></strong></p>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-4">
+            <a href="{% url 'ProductList' %}" class="btn btn-outline-primary">View More</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    var ProductImg = document.getElementById("ProductImg");
+    var SmallImg = document.getElementsByClassName("small-img");
+
+    for (let i = 0; i < SmallImg.length; i++) {
+        SmallImg[i].onclick = function () {
+            ProductImg.src = this.src;
+        }
+    }
+
+    var sizeButtons = document.querySelectorAll('.size-btn');
+    var selectedSizeInput = document.getElementById('selectedSize');
+    var quantityInput = document.getElementById('quantityInput');
+
+    sizeButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            sizeButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            selectedSizeInput.value = this.getAttribute('data-size');
+            var maxQuantity = this.getAttribute('data-quantity');
+            quantityInput.max = maxQuantity;
+            if (quantityInput.value > maxQuantity) {
+                quantityInput.value = maxQuantity;
+            }
+        });
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+{% endblock %}

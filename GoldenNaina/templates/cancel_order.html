@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancel Order</title>
+</head>
+<body>
+    <h1>Cancel Order</h1>
+    <p>Are you sure you want to cancel the order {{ order.id }}?</p>
+    <form action="" method="post">
+        {% csrf_token %}
+        <button type="submit">Yes, cancel order</button>
+        <a href="{% url 'show_orders' %}">No, go back</a>
+    </form>
+</body>
+</html>

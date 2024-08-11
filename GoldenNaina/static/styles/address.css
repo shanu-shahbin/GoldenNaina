@@ -1,0 +1,356 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.address-container {
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.address-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.address-header h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.btn-address-add {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.btn-address-add a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.address-list {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.address-card {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.address-card:last-child {
+  border-bottom: none;
+}
+
+.address-details {
+  margin-bottom: 10px;
+}
+
+.address-info {
+  margin: 5px 0;
+}
+
+.address-type {
+  font-weight: bold;
+  color: #555;
+}
+
+.address-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.address-actions a {
+  text-decoration: none;
+}
+
+.btn-address-edit, .btn-address-delete {
+  background-color: #ddd;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: none;
+  color: #000;
+}
+
+.btn-address-edit:hover, .btn-address-delete:hover {
+  background-color: #ccc;
+  text-decoration: none;
+}
+
+.text-muted {
+  color: #888;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .address-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+  }
+
+  .address-actions {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .btn-address-edit, .btn-address-delete {
+      width: 100%;
+      text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .address-container {
+      width: 100%;
+      padding: 10px;
+  }
+
+  .btn-address-add {
+      width: 100%;
+      text-align: center;
+  }
+}
+
+
+---------------------------------------------------------------------------------------------
+
+.edit-address-container {
+  margin-top: 20px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.edit-address-container h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+.edit-address-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.edit-address-container input[type="text"],
+.edit-address-container input[type="email"],
+.edit-address-container input[type="tel"],
+.edit-address-container select,
+.edit-address-container textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.btn-edit-address-primary {
+  background-color: #000; /* Black color for button */
+  border-color: #000;
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
+  align-self: center;
+  margin-top: 20px;
+}
+
+.btn-edit-address-primary:hover {
+  background-color: #444; /* Darker hover color */
+  border-color: #444;
+}
+
+a {
+  text-decoration: none; /* Remove underline from all links */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .edit-address-container {
+      padding: 15px;
+      margin: 10px; /* Add margin for smaller devices */
+  }
+
+  .edit-address-container h1 {
+      font-size: 1.5em;
+  }
+
+  .edit-address-container input[type="text"],
+  .edit-address-container input[type="email"],
+  .edit-address-container input[type="tel"],
+  .edit-address-container select,
+  .edit-address-container textarea {
+      padding: 8px;
+  }
+
+  .btn-edit-address-primary {
+      width: 100%;
+      text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .edit-address-container {
+      padding: 10px;
+      margin: 5px; /* Add margin for smaller devices */
+  }
+
+  .edit-address-container h1 {
+      font-size: 1.2em;
+  }
+
+  .edit-address-container input[type="text"],
+  .edit-address-container input[type="email"],
+  .edit-address-container input[type="tel"],
+  .edit-address-container select,
+  .edit-address-container textarea {
+      padding: 6px;
+  }
+
+  .btn-edit-address-primary {
+      width: 100%;
+      text-align: center;
+      padding: 10px 0;
+  }
+}
+
+
+-----------------------------------------------------------------------------------------------------
+
+
+
+.delete-address-container {
+  margin-top: 20px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.delete-address-container h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.delete-address-container p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  color: #666;
+}
+
+.delete-address-container form {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.btn-delete-address-danger {
+  background-color: #d9534f; /* Red color for delete button */
+  border-color: #d9534f;
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.btn-delete-address-danger:hover {
+  background-color: #c9302c; /* Darker hover color */
+  border-color: #c9302c;
+}
+
+.btn-delete-address-secondary {
+  background-color: #6c757d; /* Grey color for cancel button */
+  border-color: #6c757d;
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.btn-delete-address-secondary:hover {
+  background-color: #5a6268; /* Darker hover color */
+  border-color: #5a6268;
+}
+
+a {
+  text-decoration: none; /* Remove underline from all links */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .delete-address-container {
+      padding: 15px;
+      margin: 10px; /* Add margin for smaller devices */
+  }
+
+  .delete-address-container h1 {
+      font-size: 1.5em;
+  }
+
+  .delete-address-container p {
+      font-size: 1em;
+  }
+
+  .delete-address-container form {
+      flex-direction: column;
+      gap: 10px;
+  }
+
+  .btn-delete-address-danger,
+  .btn-delete-address-secondary {
+      width: 100%;
+      text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .delete-address-container {
+      padding: 10px;
+      margin: 5px; /* Add margin for smaller devices */
+  }
+
+  .delete-address-container h1 {
+      font-size: 1.2em;
+  }
+
+  .delete-address-container p {
+      font-size: 0.9em;
+  }
+
+  .btn-delete-address-danger,
+  .btn-delete-address-secondary {
+      width: 100%;
+      text-align: center;
+      padding: 10px 0;
+  }
+}

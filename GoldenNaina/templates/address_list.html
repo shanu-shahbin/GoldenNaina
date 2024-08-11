@@ -1,0 +1,35 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="address-container">
+    <div class="address-header">
+        <h1>My Addresses</h1>
+        <a href="{% url 'add_address' %}" class="btn-address-add">+ ADD NEW ADDRESS</a>
+    </div>
+
+    {% if addresses %}
+        <div class="address-list">
+            {% for address in addresses %}
+            <div class="address-card">
+                <div class="address-details">
+                    <p class="address-info">{{ address.street_address }} <br> {{ address.city }}<br> {{ address.emirates }}, {{ address.zip_code }}, {{ address.country }}</p>
+                    <span class="">Mobile:&nbsp;+971&nbsp;{{ address.mobile_number }}</span><br>
+                    <span class="address-type">{{ address.address_type }}</span>
+                </div>
+                <div class="address-actions">
+                    <a href="{% url 'edit_address' address.id %}" class="btn-address-edit">Edit</a>
+                    <a href="{% url 'delete_address' address.id %}" class="btn-address-delete">Delete</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-muted">You have no saved addresses.</p>
+    {% endif %}
+</div>
+
+{% endblock %}
+{% block scripts %}
+
+{% endblock %}

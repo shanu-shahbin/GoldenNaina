@@ -1,0 +1,241 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden Naina - Reviews</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-xxxxx" crossorigin="anonymous">
+
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Roboto:500,100,300,700,400);
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background: #f0f0f0; /* Light gray background */
+            color: #333; /* Dark gray text */
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem; /* Smaller padding */
+        }
+
+        .cont {
+            background: #fff; /* White background */
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .title {
+            font-size: 2.5em;
+            color: #e94560;
+            margin-bottom: 1rem;
+            text-align: center; /* Centered title */
+        }
+
+        .stars {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        input.star {
+            display: none;
+        }
+
+        label.star {
+            font-size: 2rem;
+            color: #0f3460;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        input.star:checked~label.star:before {
+            content: '\f005';
+            color: #e94560;
+            transition: all 0.25s;
+        }
+
+        input.star-5:checked~label.star:before {
+            color: #ff6b6b;
+        }
+
+        input.star-1:checked~label.star:before {
+            color: #ff9a8b;
+        }
+
+        label.star:hover {
+            transform: rotate(-15deg) scale(1.3);
+        }
+
+        label.star:before {
+            content: '\f006';
+            font-family: FontAwesome;
+        }
+
+        .rev-box {
+            margin-top: 1rem;
+        }
+
+        textarea.review {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #0f3460;
+            border-radius: 4px;
+            resize: vertical;
+            background-color: #f0f0f0; /* Light gray background */
+            color: #333; /* Dark gray text */
+        }
+
+        button[type="submit"] {
+            background-color: #e94560;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #ff6b6b;
+        }
+
+        .review-section {
+            margin-top: 2rem;
+        }
+
+        .review-item {
+            background: #fff; /* White background */
+            border: 1px solid #ddd; /* Light gray border */
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .review-rating {
+            font-size: 1.2em;
+            color: #e94560;
+        }
+
+        .review-text {
+            margin-top: 0.5rem;
+        }
+
+        .average-rating {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 1rem;
+            color: #e94560;
+            text-align: center; /* Centered average rating */
+        }
+
+        @media screen and (max-width: 768px) {
+            .container {
+                padding: 1rem; /* Adjusted padding for smaller screens */
+            }
+
+            .cont {
+                padding: 1.5rem; /* Adjusted padding for smaller screens */
+            }
+
+            .title {
+                font-size: 2em; /* Slightly smaller title on smaller screens */
+            }
+
+            .stars {
+                flex-direction: column; /* Stack stars vertically on smaller screens */
+                align-items: center; /* Center stars vertically on smaller screens */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="average-rating">
+            Average Rating: {{ average_rating.rating|floatformat:1 }} out of 5
+        </div>
+
+        <div class="review-section">
+            <h2>Existing Reviews ({{ reviews|length }})</h2>
+            {% for r in reviews %}
+            <div class="review-item">
+                <p><strong>{{ r.user.username|title }}</strong></p>
+                <p class="review-rating">
+                    {% for i in ''|ljust:r.rating %}★{% endfor %}
+                </p>
+                <p class="review-text">{{ r.review }}</p>
+                <p><small>Date: {{ r.date|date:"d M, Y" }}</small></p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="cont">
+            <h1 class="title">Write a Review</h1>
+            <div class="stars">
+                <form id="reviewForm" method="POST" action="{% url 'ajax_add_review' product.id %}" class="row g-3">
+                    {% csrf_token %}
+                    <div class="col-md-6">
+                        {{ review_form.rating }}
+                    </div>
+                    <div class="col-md-12">
+                        <textarea class="form-control review" name="review" placeholder="Write your review here..." rows="5"></textarea>
+                    </div>
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary">Submit Review</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.bundle.min.js" integrity="sha384-xxxxx" crossorigin="anonymous"></script>
+    <script>
+        $("#reviewForm").submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                data: $(this).serialize(),
+                method: $(this).attr('method'),
+                url: $(this).attr('action'),
+                dataType: 'json',
+                success: function(response) {
+                    if (response.boolean) {
+                        alert('Review submitted successfully');
+                        $(".stars").hide();
+                        location.reload(); // Reload the page to see the new review
+                    } else {
+                        alert('Failed to submit review: ' + JSON.stringify(response.errors));
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert('An error occurred: ' + xhr.responseText);
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

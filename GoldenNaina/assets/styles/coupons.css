@@ -1,0 +1,95 @@
+.coupon-container {
+  background-color: #f8f9fa;
+  padding: 20px;
+}
+
+.coupon-header {
+  font-size: 2rem;
+  color: #000;
+  text-align: center;
+}
+
+.coupon-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.coupon-card-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.coupon-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.coupon-card-body {
+  padding: 15px;
+}
+
+.coupon-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.coupon-subtitle {
+  font-size: 1.25rem;
+  color: #666;
+}
+
+.coupon-description {
+  font-size: 1rem;
+  color: #444;
+}
+
+.terms-header {
+  font-size: 1rem;
+  margin-top: 10px;
+  color: #333;
+}
+
+.terms-and-conditions {
+  font-size: 0.875rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.valid-until-text {
+  font-size: 0.875rem;
+  color: #777;
+}
+
+@media (max-width: 768px) {
+  .coupon-header {
+      font-size: 1.5rem;
+  }
+
+  .coupon-title {
+      font-size: 1.25rem;
+  }
+
+  .coupon-subtitle {
+      font-size: 1rem;
+  }
+
+  .coupon-description {
+      font-size: 0.875rem;
+  }
+
+  .terms-header {
+      font-size: 0.875rem;
+  }
+
+  .terms-and-conditions {
+      font-size: 0.75rem;
+  }
+
+  .valid-until-text {
+      font-size: 0.75rem;
+  }
+}

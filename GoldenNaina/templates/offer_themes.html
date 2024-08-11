@@ -1,0 +1,75 @@
+{% extends 'partials/base.html' %}
+
+{% block content %}
+{% load static %}
+
+<div class="offer-themes-container">
+
+    <div class="small-container">
+      <section class="hero" id="home" style="background-image: url('{{ theme.image.url }}');">
+          <div class="container">
+              <div class="hero-content">
+                  <p class="hero-subtitle">{{ theme.title }}</p>
+                  <h2 class="h1 hero-title">{{ theme.description }}</h2>
+                  <button class="btn btn-primary">Shop Now</button>
+              </div>
+          </div>
+      </section>
+  </div>
+    
+</div>
+
+<style>
+.offer-themes-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f7f7f7;
+}
+
+.hero {
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.hero-content {
+    text-align: center;
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+</style>
+
+{% endblock %}

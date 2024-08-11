@@ -1,0 +1,316 @@
+/* General CSS Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body and Container Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
+}
+
+header {
+  text-align: center;
+  padding: 10px 0;
+  background-color: #fff;
+}
+
+header h1 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
+}
+
+.container {
+  max-width: 3200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+}
+
+/* Sorting Styles */
+.sorting {
+  text-align: right;
+  margin-top: 5px;
+  margin-right: 16px;
+  margin-bottom: 15px;
+}
+
+.sorting select {
+  padding: 5px;
+  font-size: 14px;
+}
+
+/* Product List Styles */
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0px;
+  justify-content: space-between;
+}
+
+.product-list {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  text-align: center;
+  flex: 1 1 calc(50% - 10px);
+  padding-bottom: 10px;
+  position: relative;
+}
+
+.product-list img {
+  width: 100%;
+  height: 250px;
+  object-fit: fit;
+}
+
+.product-list .rating {
+  position: absolute;
+  top: 54%;
+  left: 8px;
+  font-size: 15px;
+  color: gold;
+}
+
+.product-list .brand {
+  font-weight: bold;
+  margin: 10px 0 5px;
+}
+
+.product-list .description {
+  font-size: 15px;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.product-list .price {
+  font-size: 14px;
+  font-weight: bold;
+  color: #40a9ff;
+}
+
+.product-list .old-price {
+  text-decoration: line-through;
+  color: #333;
+  margin-right: 5px;
+}
+
+.product-list .wishlist-icon {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  cursor: pointer;
+  font-size: 30px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  color: transparent;
+  transition: color 0.5s;
+  z-index: 10; /* Ensures the icon stays on top */
+}
+
+.product-list .wishlist-icon::before {
+  content: "\2661"; /* Unicode for heart outline */
+  color: #dc3545;
+}
+
+.product-list .wishlist-icon.active::before {
+  content: "\2665"; /* Unicode for filled heart */
+  color: #dc3545;
+}
+
+.product-list .discount-label {
+  position: absolute;
+  top: 5px;
+  left: 3px;
+  background-color: red;
+  color: white;
+  padding: 2px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Paginator Styles */
+.paginator {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.paginator a {
+  display: inline-block;
+  padding: 10px 15px;
+  margin: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  color: #333;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.paginator a:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+.paginator a.active {
+  background-color: #333;
+  color: #fff;
+  border-color: #333;
+}
+
+/* Media Queries */
+@media (min-width: 600px) {
+  .product-list {
+    flex: 1 1 calc(33.333% - 10px);
+  }
+
+  .product-list img {
+    width: 100%;
+    height: 450px;
+    object-fit: fit;
+  }
+
+  .product-list .rating {
+    top: 70%;
+    left: 10px;
+    font-size: 18px;
+  }
+
+  .product-list .price {
+    font-size: 16px;
+  }
+
+  .product-list .discount-label {
+    top: 10px;
+    left: 10px;
+    padding: 5px;
+    font-size: 18px;
+  }
+
+  .product-list .description {
+    font-size: 18px;
+  }
+  .product-list .wishlist-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 30px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: transparent;
+    transition: color 0.5s;
+    z-index: 10; /* Ensures the icon stays on top */
+  }
+}
+
+@media (min-width: 900px) {
+  .product-list {
+    flex: 1 1 calc(25% - 10px);
+  }
+
+  .product-list img {
+    width: 100%;
+    height: 500px;
+    object-fit: fit;
+  }
+
+  .product-list .rating {
+    top: 70%;
+    left: 10px;
+    font-size: 20px;
+  }
+
+  .product-list .price {
+    font-size: 18px;
+  }
+
+  .product-list .discount-label {
+    top: 10px;
+    left: 10px;
+    padding: 5px;
+    font-size: 18px;
+  }
+  
+  .product-list .description {
+    font-size: 20px;
+  }
+  .product-list .wishlist-icon {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 30px;
+    width: 40px;
+    height: 40px;
+    line-height: 30px;
+    text-align: center;
+    color: transparent;
+    transition: color 0.5s;
+    z-index: 10; /* Ensures the icon stays on top */
+  }
+}
+
+@media (min-width: 1200px) {
+  .sorting {
+    margin-right: 50px;
+    margin-top: 15px;
+  }
+
+  .sorting select {
+    padding: 8px;
+    font-size: 18px;
+  }
+
+  .product-list {
+    flex: 1 1 calc(20% - 10px);
+  }
+
+  .product-list img {
+    width: 100%;
+    height: 550px;
+    object-fit: fit;
+  }
+
+  .product-list .rating {
+    top: 67%;
+    left: 12px;
+    font-size: 25px;
+  }
+
+  .product-list .price {
+    font-size: 20px;
+  }
+
+  .product-list .discount-label {
+    top: 10px;
+    left: 10px;
+    padding: 5px;
+    font-size: 20px;
+  }
+  
+  .product-list .description {
+    font-size: 20px;
+  }
+  .product-list .wishlist-icon {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 50px;
+    width: 50px;
+    height: 50px;
+    line-height: 30px;
+    text-align: center;
+    color: transparent;
+    transition: color 0.5s;
+    z-index: 10; /* Ensures the icon stays on top */
+  }
+}

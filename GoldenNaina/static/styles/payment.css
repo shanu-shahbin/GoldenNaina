@@ -1,0 +1,46 @@
+/* Custom styles for checkout page */
+
+.order-review-title {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.order-items-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.order-item {
+  margin-bottom: 5px;
+}
+
+.delivery-address {
+  margin-top: 15px;
+  font-style: italic;
+}
+
+.payment-form {
+  margin-top: 20px;
+}
+
+.payment-method-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.payment-option {
+  margin-bottom: 10px;
+}
+
+.payment-submit-btn {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.payment-submit-btn:hover {
+  background-color: #0056b3;
+}

@@ -1,0 +1,49 @@
+/* contact.css */
+.contact-us-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.contact-us-form button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #007bff;
+  text-decoration: none;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.contact-us-form button:hover {
+  background-color: #0056b3;
+}
+
+.contact-success-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.contact-success-checkmark {
+  width: 100px;
+  height: 100px;
+}
+
+.contact-success-container h1 {
+  color: green;
+}
+
+.contact-success-home-link {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #007bff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.contact-success-home-link:hover {
+  background-color: #0056b3;
+}

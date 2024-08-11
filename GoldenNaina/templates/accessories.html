@@ -1,0 +1,104 @@
+{% extends 'partials/base.html' %}
+
+{% block title %}Accessories{% endblock %}
+
+{% block content %}
+{% load static %}
+{% load chunks %}
+
+<div class="container main-content">
+    <section class="sorting">
+        <form method="get" class="filter-control">
+            <select id="sort" name="sort" onchange="this.form.submit()">
+                <option value="default" {% if sort_option == 'default' %}selected{% endif %}>Sort</option>
+                <option value="low_to_high" {% if sort_option == 'low_to_high' %}selected{% endif %}>Price: Low to High</option>
+                <option value="high_to_low" {% if sort_option == 'high_to_low' %}selected{% endif %}>Price: High to Low</option>
+            </select>
+        </form>
+    </section>
+    {% for product_chunks in accessories_products|chunks:4 %}
+    <section class="products">
+        {% for product in product_chunks %}
+        <div class="product-list">
+            <span class="discount-label">{{ product.get_percentage }}% OFF</span> <!-- Discount label -->
+            <a href="{% url 'product_detail' product.id %}">
+                <img src="{{ product.image.url }}" alt="{{ product.title }}">
+            </a>
+            <div class="rating">
+                {% for i in product.rating|range %}
+                    ★
+                {% endfor %}
+            </div>
+            <p class="brand">{{ product.title }}</p>
+            <p class="description">{{ product.description|truncatechars:25 }}</p>
+            <p class="price">
+                <span class="old-price">₹{{ product.price }}</span>
+                <big> ₹{{ product.discount_price }}</big>
+            </p>
+            {% if user.is_authenticated %}
+                <span class="wishlist-icon {% if product.pk in wishlist_products %}active{% endif %}" data-product-item="{{ product.pk }}"></span>
+            {% else %}
+                <span class="wishlist-icon" data-product-item="{{ product.pk }}"></span>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </section>
+    {% endfor %}
+    <div class="paginator">
+        {% if accessories_products.has_previous %}
+            <a href="?page={{ accessories_products.previous_page_number }}&sort={{ sort_option }}">Previous</a>
+        {% endif %}
+
+        {% for i in accessories_products.paginator.page_range %}
+            <a href="?page={{ i }}&sort={{ sort_option }}" {% if accessories_products.number == i %}class="active"{% endif %}>{{ i }}</a>
+        {% endfor %}
+
+        {% if accessories_products.has_next %}
+            <a href="?page={{ accessories_products.next_page_number }}&sort={{ sort_option }}">Next</a>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.wishlist-icon').forEach(icon => {
+            icon.addEventListener('click', function() {
+                var $icon = $(this);
+                var product_id = $icon.data("product-item");
+
+                $.ajax({
+                    url: "{% url 'add-to-wishlist' %}",
+                    data: {
+                        id: product_id,
+                    },
+                    dataType: "json",
+                    beforeSend: function() {
+                        console.log("Adding to Wishlist...");
+                    },
+                    success: function(response) {
+                        if (response.bool === true) {
+                            $icon.addClass("active");
+                            $icon.text("Added");
+                        } else if (response.bool === false) {
+                            $icon.removeClass("active");
+                            $icon.text("");
+                        } else {
+                            console.error("Error:", response.error);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("AJAX Error:", error);
+                    }
+                });
+
+                this.classList.toggle('active');
+            });
+        });
+    });
+</script>
+{% endblock %}
+

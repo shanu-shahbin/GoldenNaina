@@ -1,0 +1,68 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block content %}
+
+<main class="dashboard">
+  <div class="profile">
+    {% if profile.image %}
+      <img src="{{ profile.image.url }}" alt="Profile Picture">
+    {% else %}
+    <img src="{% static 'images/profile.png' %}" alt="Profile Picture">
+    {% endif %}
+    <p>{{ profile.full_name }} {% if profile.verified %}
+      <p class="text-success"><i class="fa fa-check-circle" aria-hidden="true"></i> Verified</p>
+      {% else %}
+      <p class="text-danger"><i class="fa fa-times-circle" aria-hidden="true"></i> Not Verified</p>
+      {% endif %}</p>
+  </div>
+  <div class="cards">
+      <section class="card">
+          <a href="{% url 'orders' %}">
+              <h2>Orders <span class="arrow">→</span></h2>
+          </a>
+          <p>Check your order status</p>
+      </section>
+      <section class="card">
+          <a href="{% url 'wishlist_view' %}">
+              <h2>Wishlist <span class="arrow">→</span></h2>
+          </a>
+          <p>All your curated product collections</p>
+      </section>
+      <section class="card">
+          <a href="{% url 'address_list' %}">
+              <h2>Addresses <span class="arrow">→</span></h2>
+          </a>
+          <p>Save addresses for a hassle-free checkout</p>
+      </section>
+      <section class="card">
+          <a href="{% url 'coupons' %}">
+              <h2>Coupons <span class="arrow">→</span></h2>
+          </a>
+          <p>Manage coupons for additional discounts</p>
+      </section>
+      <section class="card">
+          <a href="{% url 'edit_profile' %}">
+              <h2>Profile<span class="arrow">→</span></h2>
+          </a>
+          <p>Change your profile details</p>
+      </section>
+      <section class="card">
+        <a href="{% url 'Logout' %}">
+            <h2>Logout <span class="arrow">→</span></h2>
+        </a>
+        <p>Logout your Account</p>
+    </section>
+  </div>
+</main>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('click', () => {
+          card.classList.toggle('active');
+      });
+  });
+</script>
+{% endblock %}

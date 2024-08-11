@@ -1,0 +1,216 @@
+{% load static %}
+{% load getstatus %}
+{% load return %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Management</title>
+    <style>
+        /* CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .status {
+            font-weight: bold;
+            color: blue;
+        }
+
+        .product-image {
+            max-width: 50px;
+            max-height: 50px;
+            margin-right: 10px;
+        }
+
+        .product-details {
+            display: flex;
+            align-items: center;
+        }
+
+        .product-title {
+            font-weight: bold;
+        }
+
+        .cancel-button, .return-button {
+            background-color: red;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .return-button {
+            background-color: green;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            .product-image {
+                max-width: 30px;
+                max-height: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            table, th, td {
+                display: block;
+            }
+
+            th {
+                background-color: #fff;
+                font-weight: bold;
+                text-align: center;
+            }
+
+            td {
+                border: none;
+                position: relative;
+                padding-left: 50%;
+                text-align: right;
+            }
+
+            td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 10px;
+                width: calc(50% - 20px);
+                white-space: nowrap;
+                font-weight: bold;
+                text-align: left;
+            }
+
+            .product-details {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Order Management</h1>
+    {% if orders %}
+    <table>
+        <thead>
+            <tr>
+                <th>Order #</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Total Price</th>
+                <th>Products</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for order in orders %}
+        <tr>
+            <td data-label="Order #">
+                <a href="{% url 'order_detail' order.id %}">{{ forloop.counter }}</a>
+            </td>
+            <td data-label="Date">{{ order.created_at }}</td>
+            <td data-label="Status" class="status">{% getstatus order.order_status %}</td>
+            <td data-label="Total Price">${{ order.total_price }}</td>
+            <td data-label="Products">
+                {% for item in order.added_items.all %}
+                    <div class="product-details">
+                        <img src="{{ item.product.image.url }}" alt="Product Image" class="product-image">
+                        <div>
+                            <div class="product-title">{{ item.product.title }}</div>
+                            <div>Size: {{ item.size }}</div>
+                            <div>Quantity: {{ item.quantity }}</div>
+                        </div>
+                    </div>
+                {% empty %}
+                    No products
+                {% endfor %}
+            </td>
+            <td data-label="Action">
+                {% if order.order_status != order.ORDER_CANCELLED and order.order_status != order.ORDER_DELIVERED and order.order_status != order.ORDER_PROCESSED %}
+                    <form action="{% url 'cancel_order' order.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="cancel-button">Cancel Order</button>
+                    </form>
+                {% elif order.order_status == order.ORDER_DELIVERED and order.is_within_return_period and not order.is_refund_requested %}
+                    <form action="{% url 'return_order' order.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="return-button">Return Order</button>
+                    </form>
+                {% else %}
+                    {% if not order.return_status %}
+                        <span>You can't cancel or return</span>
+                    {% else %}
+                        <span><b>{% get_return_status order.return_status %}</b></span>
+                    {% endif %}
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No orders found.</p>
+    {% endif %}
+</div>
+
+<script>
+    // JavaScript code (if any)
+    // You can add JavaScript functionality here
+</script>
+
+</body>
+</html>

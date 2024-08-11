@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fff;
+        }
+        
+        .container {
+            margin-top: 20px;
+        }
+        
+        .cart-header {
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        .address-section,
+        .cart-items-section,
+        .summary-section {
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .cart-item {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        
+        .cart-item img {
+            width: 120px;
+            height: auto;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        
+        .cart-item-info {
+            flex-grow: 1;
+            padding: 0 20px;
+            min-width: 200px;
+        }
+        
+        .cart-item-actions {
+            text-align: right;
+            flex-shrink: 0;
+        }
+        
+        .cart-item-actions button {
+            margin-left: 10px;
+        }
+        
+        .quantity-container {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .quantity-container input[type="number"] {
+            width: 60px;
+            text-align: center;
+        }
+        
+        .quantity-container button {
+            background: none;
+            border: 1px solid #ddd;
+            padding: 2px 5px;
+            font-size: 12px;
+        }
+        
+        .size-quantity-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .summary-section .btn {
+            width: 100%;
+            background-color: #ff3f6c;
+            color: #fff;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .apply-coupon {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .apply-coupon .form-control {
+            flex: 1;
+        }
+        
+        .proceed-button {
+            display: flex;
+            justify-content: center;
+        }
+        
+        @media (max-width: 768px) {
+            .cart-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+        
+            .cart-item-info {
+                padding: 10px 0;
+            }
+        
+            .cart-item-actions {
+                text-align: center;
+                margin-top: 10px;
+            }
+        
+            .apply-coupon {
+                flex-direction: column;
+            }
+        
+            .apply-coupon .form-control,
+            .apply-coupon .btn {
+                width: 100%;
+            }
+        
+            .size-quantity-container {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .cart-item img {
+                width: 100px;
+            }
+        
+            .btn {
+                font-size: 14px;
+            }
+        
+            body,
+            h1,
+            h5,
+            h3,
+            p,
+            .btn,
+            .section-title {
+                font-size: 0.9em;
+            }
+        
+            .cart-item-info,
+            .cart-item-actions {
+                font-size: 0.8em;
+            }
+        
+            .size-quantity-container {
+                justify-content: center;
+                gap: 5px;
+            }
+        
+            .quantity-container input[type="number"] {
+                width: 50px;
+                font-size: 0.9em;
+            }
+        
+            .quantity-container button {
+                font-size: 10px;
+                padding: 2px 4px;
+            }
+        }
+         
+    </style>        
+</head>
+
+<body>
+    <div class="container">
+        <div class="cart-header">
+            <h1>Shopping Cart</h1>
+        </div>
+
+        <!-- Available Offers Section -->
+        <div class="address-section">
+            <div class="section-title">Available Offers</div>
+            {% for offer in cart_offers %}
+            <p><b>{{ offer.offer_name }}</b>:&nbsp;{{ offer.offer_description }}</p>
+            {% endfor %}
+        </div>
+
+        <!-- Cart Items Section -->
+        <div class="cart-items-section">
+            <div class="section-title">SELECTED ITEMS</div>
+            {% if cart.added_items.all %}
+            <form id="cart-form" action="{% url 'checkout' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for cart_item in cart_items %}
+                <div class="cart-item">
+                    <img src="{{ cart_item.product.image.url }}" alt="Product Image">
+                    <div class="cart-item-info">
+                        <h5>{{ cart_item.product.title }}</h5>
+                        <p>{{ cart_item.product.description }}</p>
+                        <div class="size-quantity-container">
+                            <div class="size">Size: {{ cart_item.size }}</div>
+                            <div class="quantity-container">
+                                <button type="button" class="quantity-decrease" data-id="{{ cart_item.id }}">-</button>
+                                <input type="number" class="quantity" name="quantity_{{ cart_item.id }}" data-price="{{ cart_item.product.discount_price }}" value="{{ cart_item.quantity }}" min="1" max="{{ cart_item.stock.quantity }}">
+                                <button type="button" class="quantity-increase" data-id="{{ cart_item.id }}">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cart-item-actions">
+                        <p>AED&nbsp;{{ cart_item.product.discount_price }} <span style="text-decoration: line-through;">{{ cart_item.product.price }}</span> {{ cart_item.product.get_percentage }}% OFF</p>
+                        <p><b>{{ cart_item.product.return_policy }}&nbsp;Days</b>&nbsp;return Available</p>
+                        <p>Delivery between <span id="delivery-start-{{ cart_item.id }}"></span> - <span id="delivery-end-{{ cart_item.id }}"></span></p>
+            
+                        <a href="{% url 'remove_item' cart_item.id %}" class="btn btn-outline-danger">Remove</a>
+                        <button type="button" class="btn btn-outline-secondary move-to-wishlist" data-product-item="{{ cart_item.product.id }}">Move to Wishlist</button>
+                    </div>
+                </div>
+            {% endfor %}
+            
+                <!-- Summary Section -->
+                <div class="summary-section">
+                    <div class="section-title">Price Details ({{ cart.added_items.count }} Items)</div>
+                    <p>Coupon Discount: AED&nbsp;<span id="coupon-discount">0.00</span></p>
+                    <p>Platform Fee: FREE</p>
+                    <p>Shipping Fee: FREE</p>
+                    <h3>Total Amount: AED&nbsp;<span id="total">{{ cart.get_total }}</span></h3>
+                    <input type="hidden" name="total" id="hidden-total" value="{{ cart.get_total }}" />
+                </div>
+                <div class="apply-coupon">
+                    <input type="text" name="code" placeholder="Enter Coupon Code" class="form-control" />
+                    <button class="btn btn-primary" type="submit" name="apply_remove_coupon" id="apply-remove-coupon-button">Apply Coupon</button>
+                </div>
+                <div class="proceed-button">
+                    <button class="btn btn-primary mt-3" type="submit" name="proceed_to_checkout">Proceed to Checkout</button>
+                </div>
+            </form>
+
+            {% else %}
+            <p>Your cart is empty.</p>
+            <a href="{% url 'ProductList' %}"><button class="btn btn-dark">Continue Shopping</button></a>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+4rkZTn4IRaAzmjW1t1wGavylMw+X" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const quantities = document.querySelectorAll('.quantity');
+            const totalElement = document.getElementById('total');
+            const hiddenTotalElement = document.getElementById('hidden-total');
+            const couponDiscountElement = document.getElementById('coupon-discount');
+            const couponButton = document.getElementById('apply-remove-coupon-button');
+            const couponInput = document.querySelector('input[name="code"]');
+    
+            function updateTotals() {
+                let total = 0;
+                quantities.forEach(quantity => {
+                    const price = parseFloat(quantity.getAttribute('data-price'));
+                    const quantityValue = parseInt(quantity.value);
+                    total += price * quantityValue;
+                });
+    
+                totalElement.textContent = total.toFixed(2);
+                hiddenTotalElement.value = total.toFixed(2);
+            }
+    
+            function initEventListeners() {
+                quantities.forEach(quantity => {
+                    quantity.addEventListener('input', function() {
+                        if (parseInt(quantity.value) > parseInt(quantity.max)) {
+                            quantity.value = quantity.max;
+                        }
+                        updateTotals();
+                    });
+                });
+    
+                document.querySelectorAll('.quantity-increase').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const quantityInput = this.previousElementSibling;
+                        if (parseInt(quantityInput.value) < parseInt(quantityInput.max)) {
+                            quantityInput.value = parseInt(quantityInput.value) + 1;
+                            quantityInput.dispatchEvent(new Event('input'));
+                        }
+                    });
+                });
+    
+                document.querySelectorAll('.quantity-decrease').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const quantityInput = this.nextElementSibling;
+                        if (parseInt(quantityInput.value) > 1) {
+                            quantityInput.value = parseInt(quantityInput.value) - 1;
+                            quantityInput.dispatchEvent(new Event('input'));
+                        }
+                    });
+                });
+    
+                couponButton.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const total = parseFloat(hiddenTotalElement.value);
+                    let discount = 0;
+                    const code = couponInput.value.trim();
+    
+                    if (this.textContent === 'Apply Coupon') {
+                        if (code === 'GoldenNaina10' && total >= 100) {
+                            discount = total * 0.10;
+                        } else if (code === 'GoldenNaina30' && total >= 500) {
+                            discount = total * 0.30;
+                        } else if (code === 'GoldenNaina50' && total >= 1000) {
+                            discount = total * 0.50;
+                        }
+    
+                        couponDiscountElement.textContent = discount.toFixed(2);
+                        totalElement.textContent = (total - discount).toFixed(2);
+                        hiddenTotalElement.value = (total - discount).toFixed(2);
+                        this.textContent = 'Remove Coupon';
+                    } else {
+                        couponDiscountElement.textContent = '0.00';
+                        updateTotals();
+                        this.textContent = 'Apply Coupon';
+                    }
+                });
+    
+                document.querySelectorAll('.move-to-wishlist').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const product_id = this.getAttribute('data-product-item');
+                        const $button = this;
+    
+                        $.ajax({
+                            url: "{% url 'add-to-wishlist' %}",
+                            data: { id: product_id },
+                            dataType: "json",
+                            beforeSend: function() {
+                                console.log("Adding to Wishlist...");
+                            },
+                            success: function(response) {
+                                if (response.bool) {
+                                    $button.classList.add("active");
+                                    $button.textContent = "Added to Wishlist";
+                                } else if (response.bool === false) {
+                                    $button.classList.remove("active");
+                                    $button.textContent = "Move to Wishlist";
+                                } else {
+                                    console.error("Error:", response.error);
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.error("AJAX Error:", error);
+                            }
+                        });
+    
+                        this.classList.toggle('active');
+                    });
+                });
+            }
+    
+            function formatDate(date) {
+                const day = String(date.getDate()).padStart(2, '0');
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const year = date.getFullYear();
+                return `${day}/${month}/${year}`;
+            }
+    
+            function initializeDeliveryDates() {
+                const deliveryStartElements = document.querySelectorAll('[id^="delivery-start"]');
+                const deliveryEndElements = document.querySelectorAll('[id^="delivery-end"]');
+                const today = new Date();
+                const deliveryStartDate = formatDate(today);
+                const deliveryEndDate = formatDate(new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000));
+    
+                deliveryStartElements.forEach(el => el.textContent = deliveryStartDate);
+                deliveryEndElements.forEach(el => el.textContent = deliveryEndDate);
+            }
+    
+            // Initial update
+            updateTotals();
+            initEventListeners();
+            initializeDeliveryDates();
+        });
+    </script>
+    
+</body>
+
+</html>

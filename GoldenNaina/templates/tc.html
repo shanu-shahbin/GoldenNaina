@@ -1,0 +1,184 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Myntra T&C</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+            font-size: 16px;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #ff3f6c;
+            font-size: 2em;
+        }
+        .terms {
+            margin-top: 20px;
+            text-align: justify;
+            line-height: 1.6;
+        }
+        .terms a {
+            display: block;
+            color: #0073e6;
+            text-decoration: none;
+            margin: 10px 0;
+        }
+        .buttons {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+        .buttons button {
+            background-color: #ff3f6c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-left: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .details {
+            margin-top: 40px;
+        }
+        .details h2 {
+            color: #333;
+            font-size: 1.5em;
+        }
+        .details p {
+            margin: 10px 0;
+        }
+        .details ul {
+            list-style-type: circle;
+            margin-left: 20px;
+        }
+        .details table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .details table, .details th, .details td {
+            border: 1px solid #ddd;
+        }
+        .details th, .details td {
+            padding: 12px;
+            text-align: left;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 1200px) {
+            body {
+                font-size: 15px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            .details h2 {
+                font-size: 1.4em;
+            }
+        }
+        @media (max-width: 992px) {
+            body {
+                font-size: 14px;
+            }
+            h1 {
+                font-size: 1.6em;
+            }
+            .details h2 {
+                font-size: 1.3em;
+            }
+        }
+        @media (max-width: 768px) {
+            body {
+                font-size: 13px;
+            }
+            h1 {
+                font-size: 1.4em;
+            }
+            .details h2 {
+                font-size: 1.2em;
+            }
+        }
+        @media (max-width: 576px) {
+            body {
+                font-size: 12px;
+            }
+            h1 {
+                font-size: 1.2em;
+            }
+            .details h2 {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TERMS AND CONDITIONS</h1>
+        <div class="terms">
+            <p>Welcome to Myntra. This page details a limited period Offer provided by our participating sellers redeemable through our Myntra Marketplace Platform only in the mobile application. Please read these terms and conditions carefully before participating. You should understand that by participating in the Offer and using our Platform, you agree to be bound by these terms and conditions including Terms of Use and Privacy Policy of the Platform. Please understand that if you refuse to accept these terms and conditions, you will not be able to access the offers provided under our Platform.</p>
+            <a href="#">Slab Based Rewards - EORS' 24 "Shop 4000 - 8000"</a>
+            <a href="#">Slab Based Rewards - EORS' 24 "Shop 8000-10000"</a>
+            <a href="#">Slab Based Rewards - EORS' 24 "Shop 10000-25000"</a>
+            <a href="#">Slab Based Rewards - EORS' 24 "Shop 25000-50000"</a>
+            <a href="#">Slab Based Rewards - EORS' 24 "Shop 50000+"</a>
+            <a href="#">Top 10 Shoppers - Powered by Lenskart - EORS' 24</a>
+            <a href="#">Nivea Hourly Bonanza : Top 3 Highest spenders every hour EORS' 24</a>
+            <a href="#">Top 10 Spender to win a Titan Watch worth 18495 EORS' 24</a>
+            <a href="#">Top 15 Shoppers to get a Cabin Trolley of Rs 9999 EORS' 24</a>
+            <a href="#">Top Shopper of these brands will get free 2 days of stay at any JW Marriott in India EORS' 24</a>
+            <a href="#">Highest Spender Minimum spend of 14999/- EORS' 24</a>
+            <a href="#">CMF Mega Rewards EORS' 24</a>
+            <a href="#">USPA - EORS' 24</a>
+            <a href="#">Being Human - EORS' 24</a>
+            <a href="#">Spykar - EORS' 24</a>
+        </div>
+        <div class="buttons">
+            <button>User Agreement</button>
+            <button>Archive</button>
+        </div>
+        <div class="details">
+            {% for term in terms %}
+                <h2>{{ term.title }}</h2>
+                <p><strong>What is the offer duration?</strong></p>
+                <p>{{ term.content }}</p>
+                <p><strong>About the Program :</strong></p>
+                <p>{{ term.offer_details }}</p>
+                <p><strong>Details:</strong></p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Period</th>
+                            <th>Offer Details</th>
+                            <th>Conditions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ term.period }}</td>
+                            <td>{{ term.offer_details }}</td>
+                            <td>{{ term.conditions }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><strong>What are the conditions to avail the offer?</strong></p>
+                <ul>
+                    {% for condition in term.conditions_list %}
+                        <li>{{ condition }}</li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

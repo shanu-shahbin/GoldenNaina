@@ -1,0 +1,67 @@
+{% extends 'partials/base.html' %}
+
+{% block content %}
+{% load static %}
+{% load chunks %}
+    <header>
+        <h1>{{ total_products_count }} Items </h1>
+    </header>
+    <div class="container">
+    <section class="sorting">
+        <form method="get" class="filter-control">
+            <select id="sort" name="sort" onchange="this.form.submit()">
+                <option value="default" {% if sort_option == 'default' %}selected{% endif %}>Sort</option>
+                <option value="low_to_high" {% if sort_option == 'low_to_high' %}selected{% endif %}>Price: Low to High</option>
+                <option value="high_to_low" {% if sort_option == 'high_to_low' %}selected{% endif %}>Price: High to Low</option>
+            </select>
+        </form>
+    </section>
+    {% for product_chunks in products|chunks:4 %}
+    <section class="products">
+        {% for product in product_chunks %}
+        <div class="product-list">
+            <span class="discount-label">{{ product.get_percentage }}% OFF</span> <!-- Discount label -->
+            <a href="{% url 'product_detail' product.id %}">
+                <img src="{{ product.image.url }}" alt="{{ product.title }}">
+            </a>
+            <div class="rating">
+                {% for i in product.rating|range %}
+                    ★
+                {% endfor %}
+            </div>
+            <p class="brand">{{ product.title }}</p>
+            <p class="description">{{ product.description|truncatechars:25 }}</p>
+            <p class="price">
+                <span class="old-price">₹{{ product.price }}</span>
+                <big> ₹{{ product.discount_price }}</big>
+            </p>
+            <span class="wishlist-icon"></span>
+        </div>
+        {% endfor %}
+    </section>
+    {% endfor %}
+    <div class="paginator">
+        {% if products.has_previous %}
+            <a href="?page={{ products.previous_page_number }}&sort={{ sort_option }}">Previous</a>
+        {% endif %}
+
+        {% for i in products.paginator.page_range %}
+            <a href="?page={{ i }}&sort={{ sort_option }}" {% if products.number == i %}class="active"{% endif %}>{{ i }}</a>
+        {% endfor %}
+
+        {% if products.has_next %}
+            <a href="?page={{ products.next_page_number }}&sort={{ sort_option }}">Next</a>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script>
+    document.querySelectorAll('.wishlist-icon').forEach(icon => {
+        icon.addEventListener('click', function() {
+            this.classList.toggle('active');
+        });
+    });
+</script>
+{% endblock %}

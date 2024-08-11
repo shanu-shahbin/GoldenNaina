@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offer Loader</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+
+        #loader {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 550px;
+            height: auto;
+            background: #ebebe3;
+            border-radius: 10px;
+            overflow: hidden;
+            z-index: 2;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+
+        #loader .mainimg {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .offer-text {
+            padding: 20px;
+            font-size: 14px;
+            line-height: 2;
+            text-align: center;
+        }
+
+        .offer-text h2 {
+            font-size: 40px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .offer-text small {
+            display: inline-block;
+            color: #ff2b4e;
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: 25px;
+        }
+
+        .offer-text a {
+            display: inline-block;
+            text-align: center;
+            padding: 10px 20px;
+            background-color: #2ecc71;
+            color: white;
+            width: 60%;
+            font-weight: 600;
+            border-radius: 12px;
+            font-size: 19px;
+            text-decoration: none;
+            margin: 10px auto;
+        }
+
+        .offer-text a:hover {
+            background-color: #3aa866;
+        }
+
+        .close-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            cursor: pointer;
+        }
+
+        /* Media Queries for Responsive Design */
+        @media (max-width: 768px) {
+            .offer-text h2 {
+                font-size: 32px;
+            }
+
+            .offer-text small {
+                font-size: 20px;
+            }
+
+            .offer-text a {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .offer-text h2 {
+                font-size: 24px;
+            }
+
+            .offer-text small {
+                font-size: 16px;
+            }
+
+            .offer-text a {
+                font-size: 14px;
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    {% load static %}
+
+    <div id="loader">
+        <img class="mainimg" src="{% static 'images/paypal.jpeg' %}" alt="Offer Image">
+        <div class="offer-text">
+            <h2>Total: AED&nbsp;{{ order.total_price }}</h2>
+            <small>Limited Time Offer!</small>
+            <a href="#">{{ paypal.render }}</a>
+        </div>
+        <img src="{% static 'images/close.png' %}" class="close-icon" onclick="closeloader()" alt="Close">
+    </div>
+
+    <script>
+        setTimeout(function () {
+            document.getElementById('loader').style.display = 'none';
+        }, 200000); 
+
+        function closeloader() {
+            document.getElementById('loader').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

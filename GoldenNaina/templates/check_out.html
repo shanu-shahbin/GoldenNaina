@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <div class="small-container cart-page">
+        <h1>Checkout</h1>
+        {% if order %}
+            <table>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                </tr>
+                {% for cart_item in order.added_items.all %}
+                <tr>
+                    <td>
+                        <div class="cart-info">
+                            <img src="{{ cart_item.product.image.url }}" alt="{{ cart_item.product.title }}">
+                            <div>
+                                <p>{{ cart_item.product.title }}</p>
+                                <small>Price: ${{ cart_item.product.price }}</small>
+                                <br>
+                                <a href="{% url 'remove_item' cart_item.id %}">Remove</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td><input type="number" disabled value="{{ cart_item.quantity }}"></td>
+                    <td>${{ cart_item.quantity|floatformat:2 }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <div class="total-price">
+                <table>
+                    <tr>
+                        <td>Subtotal</td>
+                        <td>${{ order.total_price|floatformat:2 }}</td>
+                    </tr>
+                    <tr>
+                        <td>Tax</td>
+                        <td>$0.00</td>
+                    </tr>
+                    <tr>
+                        <td>Total</td>
+                        <td>${{ order.total_price|floatformat:2 }}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Address Section -->
+            <div class="address-section">
+                <h2>Shipping Addresses</h2>
+                {% if addresses %}
+                    <ul>
+                        {% for address in addresses %}
+                            <li>
+                                <p>{{ address.street }}, {{ address.city }}, {{ address.state }}, {{ address.zip_code }}, {{ address.country }}</p>
+                                <a href="{% url 'edit_address' address.id %}" class="btn btn-secondary">Edit</a>
+                                <form method="post" action="{% url 'delete_address' address.id %}" style="display:inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No addresses found. Please <a href="{% url 'add_address' %}">add an address</a>.</p>
+                {% endif %}
+                <a href="{% url 'add_address' %}" class="btn">Add New Address</a>
+            </div>
+
+            <!-- Payment Button Section -->
+            <div class="payment-button">
+                <form method="post" action="{% url 'order-confirmation' order.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="total" value="{{ order.total_price|floatformat:2 }}">
+                    <div>
+                        <label for="paypal">
+                            <input type="radio" name="payment_method" id="paypal" value="paypal" checked>
+                            PayPal
+                        </label>
+                    </div>
+                    <div>
+                        <label for="cod">
+                            <input type="radio" name="payment_method" id="cod" value="cod">
+                            Cash on Delivery
+                        </label>
+                    </div>
+                    <button type="submit" class="btn">Proceed to Checkout</button>
+                </form>
+                <div>
+                    {{ paypal.render }}
+                </div>
+            </div>
+        {% else %}
+            <p>Your cart is empty.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,206 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: #000;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header, .address-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1, .address-header h1 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .btn-address-add {
+            background-color: #000;
+            color: #ffd700;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .btn-address-add a {
+            text-decoration: none;
+            color: #ffd700;
+        }
+
+        .address-list {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+        }
+
+        .address-card {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+
+        .address-card:last-child {
+            border-bottom: none;
+        }
+
+        .address-details {
+            margin-bottom: 10px;
+        }
+
+        .address-info {
+            margin: 5px 0;
+        }
+
+        .address-type {
+            font-weight: bold;
+            color: #000;
+        }
+
+        .address-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .address-actions a {
+            text-decoration: none;
+        }
+
+        .btn-address-edit, .btn-address-delete {
+            background-color: #000;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #ffd700;
+        }
+
+        .btn-address-edit:hover, .btn-address-delete:hover {
+            background-color: #333;
+            text-decoration: none;
+        }
+
+        .text-muted {
+            color: #888;
+        }
+
+        button[type="submit"] {
+            background-color: #000;
+            color: #ffd700;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #333;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header, .address-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .address-actions {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .btn-address-edit, .btn-address-delete {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                width: 100%;
+                padding: 10px;
+            }
+
+            .btn-address-add {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Order Overview</h1>
+        <h2>Total: ${{ order.total_price }}</h2>
+        <h1>Payment</h1>
+
+        <!-- Display the form only for selecting payment method and address -->
+        <form action="{% url 'process_payment' %}" method="post">
+            {% csrf_token %}
+
+            <div class="header">
+                <h1>Saved Addresses</h1>
+                <a href="{% url 'add_address' %}" class="btn-address-add">+ ADD NEW ADDRESS</a>         
+            </div>
+            <div class="address-section">
+                {% if addresses %}
+                    <div class="address-list">
+                        {% for address in addresses %}
+                            <div class="address-card">
+                                <input type="radio" name="address_id" value="{{ address.id }}" id="address_{{ address.id }}" required>
+                                <label for="address_{{ address.id }}">
+                                    <div class="address-details">
+                                        <p class="address-info">{{ address.name }} <br>{{ address.street_address }} <br> {{ address.city }}<br> {{ address.state }}, {{ address.postal_code }}, {{ address.country }}</p>
+                                        <span>Mobile: +971 {{ address.mobile_number }}</span><br>
+                                        <span class="address-type">{{ address.address_type }}</span>
+                                    </div>
+                                </label>
+                                <div class="address-actions">
+                                    <a href="{% url 'edit_address' address.id %}" class="btn-address-edit">Edit</a>
+                                    <a href="{% url 'delete_address' address.id %}" class="btn-address-delete">Delete</a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-muted">You have no saved addresses.</p>
+                {% endif %}
+            </div>
+
+            <h3>Select Payment Method:</h3>
+            <input type="radio" name="payment_method" value="paypal" id="paypal" checked>
+            <label for="paypal">PayPal</label><br>
+            <input type="radio" name="payment_method" value="cod" id="cod">
+            <label for="cod">Cash on Delivery</label><br>
+
+            <input type="hidden" name="total" value="{{ order.total_price }}">
+
+            <button type="submit">Proceed to Payment</button>
+        </form>
+        
+        {{ paypal.render }}
+        
+    </div>
+</body>
+</html>

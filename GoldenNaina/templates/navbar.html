@@ -1,0 +1,37 @@
+{% load static %}
+
+<nav class="navbar">
+  <div class="menu-icon">
+      <a href="#"><i class="fas fa-bars"></i></a>
+  </div>
+  <div class="logo">
+      <a href="{% url 'Products' %}">GoldenNaina</a>
+  </div>
+  <div class="nav-links">
+      <a href="{% url 'Products' %}">HOME</a>
+      <a href="{% url 'men_products' %}">MEN</a>
+      <a href="{% url 'women_products' %}">WOMEN</a>           
+      <a href="{% url 'watch_products' %}">WATCHES</a>
+      <a href="{% url 'accessories_products' %}">ACCESSORIES</a>
+      <a href="{% url 'Beauty_products' %}">BEAUTY</a>
+  </div>
+  <div class="icons">
+      <a href="{% url 'search' %}" class="search-icon">
+          <i class="fas fa-search"></i>
+          <span>Search</span>
+      </a>
+      <a href="{% url 'dashboard' %}">
+          <i class="fas fa-user"></i>
+          <span>Profile</span>
+      </a>
+      <a href="{% url 'wishlist_view' %}">
+          <i class="fas fa-heart"></i>
+          <span>Wishlist</span>
+      </a>
+      <a href="{% url 'cart' %}">
+          <i class="fas fa-shopping-bag"></i>
+          <span>Bag</span>
+          <span class="bag-count">{{ cart_item_count }}</span> 
+      </a>
+  </div>
+</nav>
