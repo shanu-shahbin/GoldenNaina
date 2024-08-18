@@ -7,7 +7,7 @@
     {% if profile.image %}
       <img src="{{ profile.image.url }}" alt="Profile Picture">
     {% else %}
-    <img src="{% static 'images/profile.png' %}" alt="Profile Picture">
+    <img src="{% static 'images/profile-userprofile.jpeg' %}" alt="Profile Picture">
     {% endif %}
     <p>{{ profile.full_name }} {% if profile.verified %}
       <p class="text-success"><i class="fa fa-check-circle" aria-hidden="true"></i> Verified</p>

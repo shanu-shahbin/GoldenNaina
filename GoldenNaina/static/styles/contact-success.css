@@ -1,0 +1,75 @@
+
+
+.contact-success-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  margin-top: 50px;
+}
+
+.contact-success-checkmark {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 20px;
+  border-radius: 50%;
+}
+
+.contact-success-container h1 {
+  font-size: 2rem;
+  color: green;
+  margin-bottom: 20px;
+}
+
+.contact-success-home-link {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  color: #fff;
+  background-color: #000;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.contact-success-home-link:hover {
+  background-color: #000;
+  color: gold;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .contact-success-checkmark {
+    width: 80px;
+    height: 80px;
+  }
+
+  .contact-success-container h1 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+
+  .contact-success-home-link {
+    font-size: 1rem;
+    padding: 8px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-success-checkmark {
+    width: 90px;
+    height: 90px;
+  }
+
+  .contact-success-container h1 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .contact-success-home-link {
+    font-size: 0.9rem;
+    padding: 7px 10px;
+  }
+}

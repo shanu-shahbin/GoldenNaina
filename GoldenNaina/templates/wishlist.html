@@ -18,7 +18,7 @@
             </a>
             <div class="wishlist-product-info">
                 <p class="wishlist-brand">{{ w.product.title }}</p>
-                <p class="wishlist-description">{{ w.product.description }}</p>
+                <p class="wishlist-description">{{ w.product.description|truncatechars:50 }}</p>
                 <p class="wishlist-price">AED {{ w.product.discount_price }}</p>
                 <p class="wishlist-discount">({{ w.product.get_percentage }}% OFF)</p>
                 <div class="wishlist-buttons">
@@ -29,8 +29,9 @@
         </div>
         {% endif %}
         {% empty %}
-        <div class="wishlist-empty">
-            <h2>Your wishlist is empty</h2>
+        <div class="wishlist-empty">   
+         <img src="{% static 'images/No_wishlisted_items.jpeg' %}" alt="No wishlisted product">
+         <a href="{% url 'men_products' %}" class="visit-products-link">Visit All Products</a>
         </div>
         {% endfor %}
     </section>

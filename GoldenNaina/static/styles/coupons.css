@@ -1,11 +1,11 @@
 .coupon-container {
-  background-color: #f8f9fa;
+  background-color: #fff;
   padding: 20px;
 }
 
 .coupon-header {
   font-size: 2rem;
-  color: #000;
+  color: #0d6efd;
   text-align: center;
 }
 
@@ -33,8 +33,13 @@
 
 .coupon-title {
   font-size: 1.5rem;
-  font-weight: bold;
-  color: #333;
+  font-weight: 700;
+  color: #240750;
+  text-align: center;
+}
+
+.coupon-divider {
+  border-top: 4px dashed #000;
 }
 
 .coupon-subtitle {

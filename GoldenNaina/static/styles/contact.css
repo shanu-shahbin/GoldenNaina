@@ -1,49 +1,132 @@
-/* contact.css */
+
+
 .contact-us-container {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
   margin-top: 50px;
+  
+}
+
+.contact-us-container h1 {
+  font-size: 2.5rem;
+  color: #000;
+  margin-bottom: 20px;
+}
+
+.contact-us-messages p {
+  font-size: 1rem;
+  color: #28a745;
+  margin: 10px 0;
+}
+
+.contact-us-form {
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
+  background-color: #000;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  border: 2px solid #007bffb5;
+
+}
+
+.contact-us-form p {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.contact-us-form input[type="text"],
+.contact-us-form input[type="email"],
+.contact-us-form input[type="tel"],
+.contact-us-form input[type="url"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.contact-us-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  height: 150px;
+  resize: vertical;
 }
 
 .contact-us-form button {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 10px 20px;
+  width: 100%;
+  padding: 10px 0;
+  font-size: 1.2rem;
   color: #fff;
-  background-color: #007bff;
+  background-color: #000;
   text-decoration: none;
   border-radius: 5px;
-  border: none;
+  border: 2px solid #007bffb5;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
 }
 
 .contact-us-form button:hover {
-  background-color: #0056b3;
+  background-color: #000;
+  color: gold;
 }
 
-.contact-success-container {
-  text-align: center;
-  margin-top: 50px;
+@media (max-width: 768px) {
+  .contact-us-container h1 {
+    font-size: 2rem;
+  }
+
+  .contact-us-form {
+    padding: 15px;
+    max-width: 90%;
+  }
+
+  .contact-us-form input[type="text"],
+  .contact-us-form input[type="email"],
+  .contact-us-form input[type="tel"],
+  .contact-us-form input[type="url"] {
+    padding: 8px;
+  }
+
+  .contact-us-form textarea {
+    padding: 8px;
+    height: 120px;
+  }
+
+  .contact-us-form button {
+    font-size: 1rem;
+    padding: 8px 0;
+  }
 }
 
-.contact-success-checkmark {
-  width: 100px;
-  height: 100px;
-}
+@media (max-width: 480px) {
+  .contact-us-container h1 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
 
-.contact-success-container h1 {
-  color: green;
-}
+  .contact-us-form {
+    padding: 10px;
+  }
 
-.contact-success-home-link {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 10px 20px;
-  color: #fff;
-  background-color: #007bff;
-  text-decoration: none;
-  border-radius: 5px;
-}
+  .contact-us-form input[type="text"],
+  .contact-us-form input[type="email"],
+  .contact-us-form input[type="tel"],
+  .contact-us-form input[type="url"],
+  .contact-us-form textarea {
+    padding: 7px;
+    font-size: 0.9rem;
+  }
 
-.contact-success-home-link:hover {
-  background-color: #0056b3;
+  .contact-us-form button {
+    font-size: 0.9rem;
+    padding: 7px 0;
+  }
 }

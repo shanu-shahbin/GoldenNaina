@@ -72,6 +72,29 @@
     .track-orders-button:hover {
         background-color: #e63950;
     }
+
+    .styled-button {
+        background-color: gold;
+        color: black;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    .styled-button:hover {
+        background-color: #ffd700; /* Slightly lighter shade of gold */
+    }
+    
+    .button-link {
+        text-decoration: none;
+        color: black;
+    }
+    
+    .button-link:hover {
+        color: white; /* Changes text color on hover */
+    }
+    
     @media (min-width: 768px) {
         .container {
             flex-direction: row;
@@ -122,123 +145,108 @@
     <div class="container">
         <div class="sidebar">
             <ul>
-                <li data-topic="top-queries">Top Queries</li>
                 <li data-topic="terms-conditions">Terms and Conditions</li>
-                <li data-topic="social-carnival">Social Carnival Event</li>
                 <li data-topic="shipping" class="active">Shipping, Order Tracking & Delivery</li>
                 <li data-topic="cancellations">Cancellations and Modifications</li>
                 <li data-topic="returns">Returns and Exchange</li>
                 <li data-topic="sign-up">Sign Up and Login</li>
                 <li data-topic="payments">Payments</li>
-                <li data-topic="myntra-credit">Myntra Credit</li>
                 <li data-topic="coupons">Coupons and "My Cashback"</li>
-                <li data-topic="phonepe-wallet">PhonePe Wallet</li>
-                <li data-topic="gift-cards">Gift Cards</li>
-                <li data-topic="gift-wrapping">Gift Wrapping</li>
-                <li data-topic="email-verification">E-mail verification policy</li>
             </ul>
         </div>
         <div class="content" id="content">
             <!-- Default content -->
-            <a href="#" class="track-orders-button">TRACK ORDERS</a>
-            <h2>Shipping, Order Tracking & Delivery</h2>
-            <p>You can track your orders in MyMyntra</p>
-            <h3>What is Myntra's Platform Fee?</h3>
+            <a href="{% url 'orders' %}" class="track-orders-button">TRACK ORDERS</a>           
+             <h2>Shipping, Order Tracking & Delivery</h2>
+            <p>You can track your orders in Profile >> Orders in GoldenNaina.</p>
+            <h3>What is Golden Naina's Platform Fee?</h3>
             <p>Refund of Platform Fee</p>
-            <h3>What is Myntra's Shipping Fee?</h3>
-            <p>a) Shipping fee is charged towards providing delivery and post order services including but not limited to, higher than average returns</p>
-            <p>b) Shipping is a value added service charge levied under one of the following circumstances:</p>
+            <h3>What is Golden Naina's Shipping Fee?</h3>
+            <p>a) Shipping fee is charged towards providing delivery and post-order services, including but not limited to, higher-than-average returns.</p>
+            <p>b) Shipping is a value-added service charge levied under one of the following circumstances:</p>
             <ol>
-                <li>Orders below a certain value. The value can vary based on the category</li>
-                <li>a) Orders below INR 1199 for all categories except personal care and personal care orders below INR 299 (not applicable for Insiders) are charged with Shipping fee.</li>
-                <li>b) The final shipping fee is calculated post application of any 'coupon benefit' and offers</li>
-                <li>c) The threshold values can change, please review the Shipping Fee at the time of checkout</li>
-                <li>c) Shipping fee is not levied to Myntra Insiders, irrespective of the order value.</li>
+                <li>Orders below a certain value. The value can vary based on the category.</li>
+                <li>Orders below AED 150 for all categories are charged with a shipping fee.</li>
+                <li>The final shipping fee is calculated post-application of any 'coupon benefit' and offers.</li>
+                <li>The threshold values can change, please review the Shipping Fee at the time of checkout.</li>
+                <li>Shipping fee is not levied on Golden Naina Insiders, irrespective of the order value.</li>
             </ol>
             <h3>Refund of Shipping Fee</h3>
-            <p>What is Myntra’s Fair Usage Policy?</p>
-            <p>I am an Insider. Why am I seeing the shipping fee?</p>
-            <p>How do I check the status of my order?</p>
-            <p>How can I check if Myntra delivers to my PIN Code?</p>
-            <p>How are orders placed on Myntra delivered to me?</p>
+            <p>Refunds of shipping fees are handled under Golden Naina’s Fair Usage Policy.</p>
+            <p>If you are an Insider and see a shipping fee, please contact our support for clarification.</p>
         </div>
     </div>
     <script>
         const topics = {
-            "top-queries": `
-                <h2>Top Queries</h2>
-                <p>Here you will find answers to the most frequently asked questions.</p>
-            `,
+            
             "terms-conditions": `
-                <h2>Terms and Conditions</h2>
-                <p>Read our terms and conditions to know more about our policies.</p>
-            `,
-            "social-carnival": `
-                <h2>Social Carnival Event</h2>
-                <p>Details about the Social Carnival Event.</p>
-            `,
+            <h2>Terms and Conditions</h2>
+            <p>Read our terms and conditions to know more about our policies.</p>
+            <div class="buttons">
+                <button class="styled-button">
+                    <a href="/termsUse/" class="button-link">User Agreement</a>
+                </button>
+            </div>
+        `,
             "shipping": `
-                <a href="#" class="track-orders-button">TRACK ORDERS</a>
+                <a href="/orders/" class="track-orders-button">TRACK ORDERS</a>
                 <h2>Shipping, Order Tracking & Delivery</h2>
-                <p>You can track your orders in MyMyntra</p>
-                <h3>What is Myntra's Platform Fee?</h3>
+                <p>You can track your orders in GoldenNaina/profile/orders.</p>
+                <h3>What is Golden Naina's Platform Fee?</h3>
                 <p>Refund of Platform Fee</p>
-                <h3>What is Myntra's Shipping Fee?</h3>
-                <p>a) Shipping fee is charged towards providing delivery and post order services including but not limited to, higher than average returns</p>
-                <p>b) Shipping is a value added service charge levied under one of the following circumstances:</p>
+                <h3>What is Golden Naina's Shipping Fee?</h3>
+                <p>a) Shipping fee is charged towards providing delivery and post-order services, including but not limited to, higher-than-average returns.</p>
+                <p>b) Shipping is a value-added service charge levied under one of the following circumstances:</p>
                 <ol>
-                    <li>Orders below a certain value. The value can vary based on the category</li>
-                    <li>a) Orders below INR 1199 for all categories except personal care and personal care orders below INR 299 (not applicable for Insiders) are charged with Shipping fee.</li>
-                    <li>b) The final shipping fee is calculated post application of any 'coupon benefit' and offers</li>
-                    <li>c) The threshold values can change, please review the Shipping Fee at the time of checkout</li>
-                    <li>c) Shipping fee is not levied to Myntra Insiders, irrespective of the order value.</li>
+                    <li>Orders below a certain value. The value can vary based on the category.</li>
+                    <li>Orders below AED 150 for all categories are charged with a shipping fee.</li>
+                    <li>The final shipping fee is calculated post-application of any 'coupon benefit' and offers.</li>
+                    <li>The threshold values can change, please review the Shipping Fee at the time of checkout.</li>
+                    <li>Shipping fee is not levied on Golden Naina Insiders, irrespective of the order value.</li>
                 </ol>
                 <h3>Refund of Shipping Fee</h3>
-                <p>What is Myntra’s Fair Usage Policy?</p>
-                <p>I am an Insider. Why am I seeing the shipping fee?</p>
-                <p>How do I check the status of my order?</p>
-                <p>How can I check if Myntra delivers to my PIN Code?</p>
-                <p>How are orders placed on Myntra delivered to me?</p>
+                <p>Refunds of shipping fees are handled under Golden Naina’s Fair Usage Policy.</p>
             `,
+
             "cancellations": `
-                <h2>Cancellations and Modifications</h2>
-                <p>Information about cancellations and modifications of orders.</p>
-            `,
-            "returns": `
-                <h2>Returns and Exchange</h2>
-                <p>Details on how to return or exchange products.</p>
-            `,
+        <h2>Cancellations and Modifications</h2>
+        <p>Information about cancellations and modifications of orders.</p>
+        <div class="buttons">
+            <button class="styled-button">
+                <a href="/termsUse/" class="button-link">Learn More</a>
+            </button>
+        </div>
+        <h3>What is GoldenNaina's Cancellation Policy?</h3>
+        <p>You can now cancel an order when it is in packed/Deliverd status, as long as the cancel option is available on the Website. This includes items purchased on sale as well. Any amount paid will be credited into the same payment mode using which the payment was made.</p>
+        <h3>How do I cancel my Order?</h3>
+        <p>Tap on the “Orders” section under the main menu profile section of your Website and then select the item or order you want to cancel.</p>
+    `,
+    "returns": `
+    <h2>Returns and Exchange</h2>
+    <p>Details on how to return or exchange products.</p>
+    <p>We understand that sometimes a product may not meet your expectations, which is why we offer a return option to ensure your satisfaction. You can return your items within a specified period after delivery, provided they meet our return policy conditions. Whether the product doesn't fit, or you simply changed your mind, we're here to help with the return process.</p>
+    <p>However, please note that while returns are currently available, our exchange service is not yet operational. We are actively working on introducing an exchange option in the near future, allowing you to swap your purchase for a different size, color, or even a completely different item. Stay tuned for updates as we expand our services to provide even more flexibility and convenience for our valued customers.</p>
+`,
             "sign-up": `
-                <h2>Sign Up and Login</h2>
-                <p>Information about signing up and logging in.</p>
-            `,
-            "payments": `
-                <h2>Payments</h2>
-                <p>Details about payment methods and policies.</p>
-            `,
-            "myntra-credit": `
-                <h2>Myntra Credit</h2>
-                <p>Information about Myntra Credit and its usage.</p>
-            `,
+            <h2>Sign Up and Login</h2>
+            <p>Information about signing up and logging in.</p>
+            <h3>How do I create an account on GoldenNaina?</h3>
+            <p>You can create your account on GoldenNaina by entering and verifying your Email. Click on "Create New Account" after that and fill up the form to create your GoldenNaina account.</p>
+            
+            <h3>How do I login on GoldenNaina? I used to login with email.</h3>
+            <p>For older users of GoldenNaina who used to log in with email, enter your email and OTP, then choose your method of login under 'Already have an account?'. Once you have entered the details, you will be logged in to your account. Next time, you can log in, and if you don't remember your password, use the 'Forgot Password' option or log in with OTP for easy access.</p>
+        
+        `,
+        "payments": `
+        <h2>Payments</h2>
+        <p>Details about payment methods and policies.</p>
+        <p>We offer multiple payment options for your convenience. You can choose to pay using Cash on Delivery (COD), which allows you to pay for your order at the time of delivery. This option is particularly useful if you prefer to make payments in cash or want to ensure you receive the product before paying.</p>
+        <p>In addition to COD, we also accept payments through PayPal, a secure and widely recognized online payment platform. PayPal allows you to pay using your PayPal balance, bank account, or credit/debit cards. This method is ideal for those who prefer the security and ease of online transactions.</p>
+    `,
+    
             "coupons": `
                 <h2>Coupons and "My Cashback"</h2>
                 <p>Details about available coupons and cashback offers.</p>
-            `,
-            "phonepe-wallet": `
-                <h2>PhonePe Wallet</h2>
-                <p>Information about using PhonePe Wallet for payments.</p>
-            `,
-            "gift-cards": `
-                <h2>Gift Cards</h2>
-                <p>Details about gift cards.</p>
-            `,
-            "gift-wrapping": `
-                <h2>Gift Wrapping</h2>
-                <p>Information about gift wrapping services.</p>
-            `,
-            "email-verification": `
-                <h2>E-mail verification policy</h2>
-                <p>Details about email verification policy.</p>
             `
         };
 

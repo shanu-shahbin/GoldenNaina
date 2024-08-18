@@ -214,7 +214,7 @@
                     <img src="{{ cart_item.product.image.url }}" alt="Product Image">
                     <div class="cart-item-info">
                         <h5>{{ cart_item.product.title }}</h5>
-                        <p>{{ cart_item.product.description }}</p>
+                        <p>{{ cart_item.product.description|truncatechars:25 }}</p>
                         <div class="size-quantity-container">
                             <div class="size">Size: {{ cart_item.size }}</div>
                             <div class="quantity-container">

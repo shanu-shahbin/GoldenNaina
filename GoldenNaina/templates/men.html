@@ -30,7 +30,7 @@
                 {% endfor %}
             </div>
             <p class="brand">{{ product.title }}</p>
-            <p class="description">{{ product.description|truncatechars:25 }}</p>
+            <p class="description">{{ product.description|truncatechars:17 }}</p>
             <p class="price">
                 <span class="old-price">AED {{ product.price }}</span>
                 <big> AED {{ product.discount_price }}</big>

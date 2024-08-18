@@ -1,11 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Refund Approved</title>
-</head>
-<body>
-    <h1>Refund Request Approved</h1>
-    <p>Your refund request has been successfully submitted. We will process your refund shortly.</p>
-</body>
-</html>
+{% extends 'partials/base.html' %}
+{% block title %}Refund Approved{% endblock %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 80px auto 20px auto; padding: 30px; background-color: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <h1 style="color: #2c3e50; font-size: 1.8em; border-bottom: 2px solid #3498db; padding-bottom: 10px; margin-bottom: 20px; text-align: center;">
+        Refund Request Approved
+    </h1>
+    <p style="font-size: 1.2em; color: #333; text-align: center;">
+        Your refund request has been successfully submitted. We will process your refund shortly.
+    </p>
+</div>
+{% endblock %}
+

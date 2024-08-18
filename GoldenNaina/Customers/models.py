@@ -24,7 +24,7 @@ class Customer_Address(models.Model):
     city = models.CharField(max_length=100, default='AbuDubai')  # Default to Dubai
     emirates = models.CharField(max_length=100, default='AbuDubai')  # Default to Dubai
     zip_code = models.CharField(max_length=20)  # Zip code
-    country = models.CharField(max_length=100, default='Emirates')  # Default to Emirates
+    country = models.CharField(max_length=100, default='UAE')  
     mobile_number = models.CharField(max_length=20)  # 971-(1)968565699
     address_type = models.CharField(max_length=10, choices=(('Home', 'Home'), ('Work', 'Work')), default='Home')
 
@@ -55,7 +55,7 @@ class Profile(models.Model):
     phone = models.CharField(max_length=20, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    verified = models.BooleanField(default=False)
+    verified = models.BooleanField(default=True)
 
     def __str__(self):
         return self.full_name

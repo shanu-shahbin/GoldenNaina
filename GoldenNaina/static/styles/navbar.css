@@ -9,19 +9,20 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 15px 30px;
+  padding: 10px 20px;
   background-color: #000;
   border-bottom: 1px solid #FFD700;
+  flex-wrap: nowrap;
 }
 
 .menu-icon a {
-  font-size: 28px;
+  font-size: 22px;
   color: #fff;
   cursor: pointer;
 }
 
 .logo a {
-  font-size: 28px;
+  font-size: 20px;
   font-weight: bold;
   color: #FFC94A;
   text-decoration: none;
@@ -63,7 +64,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .category-bar {
@@ -165,8 +166,8 @@ body {
   }
 
   .nav-links a {
-      margin: 0 30px;
-      font-size: 26px;
+      margin: 0 10px;
+      font-size: 18px;
       position: relative;
       border: none;
       padding: 0;
@@ -192,12 +193,26 @@ body {
       width: 100%;
   }
 
-  .logo a {
-      font-size: 33px;
-  }
-
   .icons {
-      margin-left: auto;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  
+  .icons a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 15px; /* Reduced margin */
+    font-size: 12px; /* Reduced font size */
+    color: #fff;
+    text-decoration: none;
+    position: relative;
+  }
+  
+  .icons i {
+    font-size: 20px; /* Reduced icon size */
+    padding-bottom: 3px;
   }
 }
 
@@ -239,7 +254,7 @@ body {
   }
   .icons .bag-count {
       position: absolute;
-      top: -10px;
+      top: -8px;
       right: -19px;
       background-color: #fff;
       color: #d31538;
@@ -250,6 +265,6 @@ body {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: bold;
+      font-weight: 500;
   }
 }

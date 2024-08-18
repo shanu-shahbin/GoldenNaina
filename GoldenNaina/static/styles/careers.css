@@ -1,0 +1,149 @@
+.careers-section {
+  background: white;
+  padding: 50px 20px;
+}
+
+.careers-section h2 {
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 40px;
+  font-weight: bold;
+}
+
+.job-listing {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.job-card {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s, box-shadow 0.3s;
+  height: 100%;
+}
+
+.job-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.job-card h3 {
+  margin-top: 0;
+  font-size: 24px;
+  color: #3e2ddf;
+  text-align: center;
+}
+
+.job-card p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.job-card .experience {
+  color: #555;
+}
+
+.job-card .footer-careers {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+  width: 100%;
+}
+
+.job-card .location, .job-card .posted-date {
+  color: #888;
+  font-size: 14px;
+}
+
+.job-card .location {
+  text-align: left;
+}
+
+.job-card .posted-date {
+  text-align: right;
+}
+
+.job-status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  background: white;
+  padding: 20px;
+}
+
+.apply-through, .no-postings {
+  font-size: 20px;
+  color: #000;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .careers-section h2 {
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+
+  .job-listing {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+
+  .job-card {
+    padding: 15px;
+  }
+
+  .job-card h3 {
+    font-size: 20px;
+  }
+
+  .job-card .footer-careers {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .job-card .location, .job-card .posted-date {
+    font-size: 12px;
+    text-align: left;
+    margin-top: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .careers-section {
+    padding: 30px 10px;
+  }
+
+  .careers-section h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .job-card {
+    padding: 10px;
+  }
+
+  .job-card h3 {
+    font-size: 18px;
+  }
+
+  .apply-through, .no-postings {
+    font-size: 18px;
+  }
+
+  .job-card .location {
+    text-align: left;
+  }
+  
+  .job-card .posted-date {
+    text-align: right;
+  }
+}

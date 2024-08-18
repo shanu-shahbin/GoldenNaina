@@ -30,10 +30,10 @@
                 {% endfor %}
             </div>
             <p class="brand">{{ product.title }}</p>
-            <p class="description">{{ product.description|truncatechars:25 }}</p>
+            <p class="description">{{ product.description|truncatechars:17 }}</p>
             <p class="price">
-                <span class="old-price">₹{{ product.price }}</span>
-                <big> ₹{{ product.discount_price }}</big>
+                <span class="old-price">AED {{ product.price }}</span>
+                <big> AED {{ product.discount_price }}</big>
             </p>
             {% if user.is_authenticated %}
                 <span class="wishlist-icon {% if product.pk in wishlist_products %}active{% endif %}" data-product-item="{{ product.pk }}"></span>

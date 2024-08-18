@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -95,7 +96,7 @@
             background-color: #f8f9fa;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s, box-shadow 0.3s;
-            height: 400px; /* Set a specific height for the items */
+            height: 450px; /* Set a specific height for the items */
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -164,6 +165,52 @@
             grid-template-columns: repeat(1, 1fr);
         }
         
+------------------------------------------------------------------------
+.no-results-message {
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full height for vertical centering */
+}
+
+.no-results-message p {
+    margin: 10px 0;
+}
+
+.no-results-message img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    .no-results-message img {
+        max-width: 100%; /* Full width on larger screens */
+    }
+}
+
+.no-results-message .hint {
+    font-style: italic;
+    color: #777;
+    margin-top: 10px;
+}
+
+.no-results-message .hint a {
+    color: #007bff; /* Link color */
+    text-decoration: none;
+}
+
+.no-results-message .hint a:hover {
+    text-decoration: underline;
+}
+
+
+----------------------------------------------------------------------------
         @media (min-width: 768px) {
             .products-grid {
                 grid-template-columns: repeat(3, 1fr);
@@ -174,6 +221,7 @@
         
             .product-item, .wishlist-item {
                 height: 450px; /* Adjust height for medium screens */
+                margin: 15px;
             }
         
             .wishlist-item img, .product-item img {
@@ -191,7 +239,8 @@
             }
         
             .product-item, .wishlist-item {
-                height: 500px; /* Adjust height for large screens */
+                height: 450px; /* Adjust height for large screens */
+                margin: 20px;
             }
         
             .wishlist-item img, .product-item img {
@@ -241,7 +290,7 @@
     </style>
 </head>
 <body>
-    <div class="container-fluid">
+     <div class="container-fluid">
         <div class="row">
             <div class="col-12 search-container">
                 <form class="search-form" action="{% url 'search' %}" method="get" onsubmit="showSpinner()">
@@ -271,7 +320,6 @@
                                     <img src="{{ product.image.url }}" alt="{{ product.title }}" width="100%" height="auto">
                                     <h4>{{ product.title }}</h4>
                                 </a>
-                                <p class="description">{{ product.description|truncatechars:25 }}</p>
                                 <p class="price">
                                     <span class="old-price">AED {{ product.price }}</span>
                                     <span class="discount-price">AED {{ product.discount_price }}</span>
@@ -279,8 +327,12 @@
                             </div>
                         {% endfor %}
                     {% else %}
-                        <p>No results found.</p>
-                    {% endif %}
+
+                    <div class="no-results-message">
+                        <img src="{% static 'images/Not_found_design.jpeg' %}" alt="{{ product.title }}" width="100%" height="auto">
+                        <p class="hint" style="text-align: center;">It might be a <a href="{% url 'men_products' %}">men's ?</a> or <a href="{% url 'women_products' %}">women's ?</a>.</p>  
+                     </div>       
+                {% endif %}
                 </div>
             </div>
         </div>
@@ -308,8 +360,8 @@
                     <a href="{% url 'product_detail' wishlist_item.product.id %}">
                         <img src="{{ wishlist_item.product.image.url }}" alt="{{ wishlist_item.product.title }}" width="100%" height="auto">
                         <h4>{{ wishlist_item.product.title }}</h4>
-                        <h4>{{ wishlist_item.product.description }}</h4>
-                    </a>
+                        
+                        </a>
                     <p class="price">
                         <span class="old-price">AED {{  wishlist_item.product.price }}</span>
                         <span class="discount-price">AED <big>{{  wishlist_item.product.discount_price }}</big></span>

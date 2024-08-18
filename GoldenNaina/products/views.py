@@ -212,6 +212,7 @@ class CategoryDetailView(DetailView):
         context['sort_option'] = sort_option
         return context
 
+@login_required
 def reviews(request, pk):
     product = get_object_or_404(Product, pk=pk)
     reviews = ProductReview.objects.filter(product=product).order_by('-date')
@@ -277,7 +278,7 @@ def ajax_add_review(request, pk):
 
 def search(request):
     if request.user.is_authenticated:
-        wishlist = Wishlist.objects.filter(user=request.user)[:4]
+        wishlist = Wishlist.objects.filter(user=request.user)[:3]
     else:
         wishlist = []  # Empty list if the user is not authenticated
 

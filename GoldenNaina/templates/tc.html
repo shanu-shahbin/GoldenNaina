@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Myntra T&C</title>
+    <title>Golden Naina T&C</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
-            background-color: #f5f5f5;
+            background-color: #f9f9f9;
             font-size: 16px;
+            align-items: center;
         }
         .container {
             background-color: white;
@@ -20,7 +21,7 @@
         }
         h1 {
             text-align: center;
-            color: #ff3f6c;
+            color: #DAA520;
             font-size: 2em;
         }
         .terms {
@@ -40,13 +41,14 @@
             margin-top: 20px;
         }
         .buttons button {
-            background-color: #ff3f6c;
+            background-color: #DAA520;
             color: white;
             border: none;
             padding: 10px 20px;
             margin-left: 10px;
             border-radius: 4px;
             cursor: pointer;
+            text-align: center;
         }
         .details {
             margin-top: 40px;
@@ -126,27 +128,20 @@
     <div class="container">
         <h1>TERMS AND CONDITIONS</h1>
         <div class="terms">
-            <p>Welcome to Myntra. This page details a limited period Offer provided by our participating sellers redeemable through our Myntra Marketplace Platform only in the mobile application. Please read these terms and conditions carefully before participating. You should understand that by participating in the Offer and using our Platform, you agree to be bound by these terms and conditions including Terms of Use and Privacy Policy of the Platform. Please understand that if you refuse to accept these terms and conditions, you will not be able to access the offers provided under our Platform.</p>
-            <a href="#">Slab Based Rewards - EORS' 24 "Shop 4000 - 8000"</a>
-            <a href="#">Slab Based Rewards - EORS' 24 "Shop 8000-10000"</a>
-            <a href="#">Slab Based Rewards - EORS' 24 "Shop 10000-25000"</a>
-            <a href="#">Slab Based Rewards - EORS' 24 "Shop 25000-50000"</a>
-            <a href="#">Slab Based Rewards - EORS' 24 "Shop 50000+"</a>
-            <a href="#">Top 10 Shoppers - Powered by Lenskart - EORS' 24</a>
-            <a href="#">Nivea Hourly Bonanza : Top 3 Highest spenders every hour EORS' 24</a>
-            <a href="#">Top 10 Spender to win a Titan Watch worth 18495 EORS' 24</a>
-            <a href="#">Top 15 Shoppers to get a Cabin Trolley of Rs 9999 EORS' 24</a>
-            <a href="#">Top Shopper of these brands will get free 2 days of stay at any JW Marriott in India EORS' 24</a>
-            <a href="#">Highest Spender Minimum spend of 14999/- EORS' 24</a>
-            <a href="#">CMF Mega Rewards EORS' 24</a>
-            <a href="#">USPA - EORS' 24</a>
-            <a href="#">Being Human - EORS' 24</a>
-            <a href="#">Spykar - EORS' 24</a>
+            <p>Welcome to Golden Naina. This page provides details about our limited period offers, available exclusively through our Golden Naina Marketplace Platform in the mobile application. Please read these terms and conditions carefully before participating. By participating in the Offer and using our Platform, you agree to be bound by these terms and conditions, including our Terms of Use and Privacy Policy. If you do not accept these terms and conditions, you will not be able to access the offers provided under our Platform.</p>
+            <a href="#">Golden Naina Exclusive - Shop & Win AED 500 Voucher</a>
+            <a href="#">Golden Naina Mega Sale - Discounts up to 50%</a>
+            <a href="#">Golden Naina Fashion Fiesta - Buy 2 Get 1 Free</a>
+            <a href="#">Golden Naina VIP Club - Earn Double Rewards</a>
+            <a href="#">Golden Naina Premium Shopper - Free Gifts with Purchases Over AED 1000</a>
+            <a href="#">Top 10 Shoppers - Win a Trip to Dubai Fashion Week</a>
+            <a href="#">Hourly Deals - Flash Sales Every Hour</a>
         </div>
+
         <div class="buttons">
-            <button>User Agreement</button>
-            <button>Archive</button>
+            <button><a href="{% url 'terms_use' %}">User Agreement</a></button>  
         </div>
+
         <div class="details">
             {% for term in terms %}
                 <h2>{{ term.title }}</h2>

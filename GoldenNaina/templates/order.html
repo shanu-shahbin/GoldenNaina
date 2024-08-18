@@ -8,12 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Management</title>
     <style>
-        /* CSS styles */
+        /* General Styles */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f9f9f9;
+            background-color: #fff;
+            
         }
 
         .container {
@@ -27,116 +28,209 @@
         }
 
         h1 {
-            text-align: center;
             font-size: 2em;
             margin-bottom: 20px;
             color: #333;
+            text-align: center;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
+        /* Order Item Styles */
+        .order-item {
+            margin-bottom: 30px; /* Increased margin to create space between orders */
+            padding: 15px;
+            border: 2px solid #000;
+            border-radius: 5px;
+            background-color: #fff;
+            text-align: left; 
         }
 
-        th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: left;
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            color: #000;
+            font-family: 'Times New Roman', Times, serif;
+            
         }
 
-        th {
-            background-color: #f4f4f4;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        tr:hover {
-            background-color: #f1f1f1;
+        .order-header div {
+            margin-right: 10px;
+            flex: 1;
         }
 
         .status {
-            font-weight: bold;
-            color: blue;
+            font-weight: 600;
+            color: #eb1d1d;
+            font-family: 'Times New Roman', Times, serif;
         }
 
-        .product-image {
-            max-width: 50px;
-            max-height: 50px;
-            margin-right: 10px;
+        /* Order Products Styles */
+        .order-products {
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping if needed */
+            margin-bottom: 10px;
+            justify-content: center; /* Center-align products */
         }
 
         .product-details {
             display: flex;
             align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+            flex-basis: 48%; /* Ensure two products fit in one row */
+            max-width: 100%; /* Make sure it doesn't overflow */
+        }
+
+        .product-image {
+            width: 150px;
+            height: 150px;
+            border: 1px solid gold;
+            border-radius: 5px;
+            object-fit: fit;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%; /* Make the container width fit small screens better */
+            }
+
+            .product-details {
+                flex-direction: column;
+                align-items: center; /* Center-align product details */
+                text-align: center; /* Center-align text in product details */
+            }
+
+            .product-image {
+                width: 100px;
+                height: 100px;
+            }
+
+            .order-header {
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: center; /* Center-align text in order header */
+            }
+
+            .order-actions {
+                justify-content: center;
+                margin-top: 10px;
+            }
+
+            .cancel-button, .return-button, .details-button {
+                width: 100%; /* Make buttons full-width on tablets */
+                margin-bottom: 10px; /* Add space between buttons */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-details {
+                flex-direction: column;
+                align-items: center; 
+                text-align: center; 
+            }
+
+            .product-image {
+                width: 80px;
+                height: 80px;
+            }
+
+            .order-header {
+                flex-direction: column;
+                align-items: center; 
+                
+            }
+
+            .order-actions {
+                justify-content: center;
+                flex-direction: column; /* Stack buttons vertically */
+            }
+
+            .cancel-button, .return-button, .details-button {
+                width: 100%; /* Make buttons full-width on mobile */
+                margin-bottom: 10px; /* Add space between buttons */
+            }
+
+            .details-button {
+                margin-bottom: 0; /* Remove bottom margin from last button */
+                text-align: center; 
+                text-decoration: none; 
+            }
         }
 
         .product-title {
             font-weight: bold;
         }
 
-        .cancel-button, .return-button {
+        /* Updated Action Button Styles */
+        .order-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10px;
+            gap: 10px; /* Adds space between the buttons */
+        }
+
+        .cancel-button, .return-button, .details-button {
             background-color: red;
             color: white;
-            padding: 5px 10px;
+            padding: 10px 15px;
             border: none;
             cursor: pointer;
             border-radius: 3px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            max-width: 200px;
+        }
+
+        .details-button {
+            background-color: #007bff;
+            white-space: nowrap; 
+            text-align: center; 
+            text-decoration: none; 
         }
 
         .return-button {
             background-color: green;
         }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-
-            table {
-                font-size: 0.9em;
-            }
-
-            .product-image {
-                max-width: 30px;
-                max-height: 30px;
-            }
+        .cancel-button:hover, .return-button:hover, .details-button:hover {
+            opacity: 0.8;
         }
 
-        @media (max-width: 480px) {
-            table, th, td {
-                display: block;
-            }
+        /* No Orders Found Styles */
+        .no-orders {
+            text-align: center;
+            margin-top: 50px;
+            items-align: center;
+        }
 
-            th {
-                background-color: #fff;
-                font-weight: bold;
-                text-align: center;
-            }
+        .no-orders img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
 
-            td {
-                border: none;
-                position: relative;
-                padding-left: 50%;
-                text-align: right;
-            }
+        .visit-products-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #000;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
 
-            td::before {
-                content: attr(data-label);
-                position: absolute;
-                left: 10px;
-                width: calc(50% - 20px);
-                white-space: nowrap;
-                font-weight: bold;
-                text-align: left;
-            }
-
-            .product-details {
-                flex-direction: column;
-                align-items: flex-start;
-            }
+        .visit-products-link:hover {
+            color: gold;
         }
     </style>
 </head>
@@ -145,72 +239,66 @@
 <div class="container">
     <h1>Order Management</h1>
     {% if orders %}
-    <table>
-        <thead>
-            <tr>
-                <th>Order #</th>
-                <th>Date</th>
-                <th>Status</th>
-                <th>Total Price</th>
-                <th>Products</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
         {% for order in orders %}
-        <tr>
-            <td data-label="Order #">
-                <a href="{% url 'order_detail' order.id %}">{{ forloop.counter }}</a>
-            </td>
-            <td data-label="Date">{{ order.created_at }}</td>
-            <td data-label="Status" class="status">{% getstatus order.order_status %}</td>
-            <td data-label="Total Price">${{ order.total_price }}</td>
-            <td data-label="Products">
-                {% for item in order.added_items.all %}
-                    <div class="product-details">
-                        <img src="{{ item.product.image.url }}" alt="Product Image" class="product-image">
-                        <div>
-                            <div class="product-title">{{ item.product.title }}</div>
-                            <div>Size: {{ item.size }}</div>
-                            <div>Quantity: {{ item.quantity }}</div>
+        <div class="order-item">
+            <div class="order-header">
+                <div><strong>Order id:</strong>&nbsp;{{ order.id }}</div>
+                <div><strong>Date:</strong> {{ order.created_at }}</div>
+                <div><strong>Status:</strong> <span class="status">{% getstatus order.order_status %}</span></div>
+                <div><strong>Total Price:</strong> AED {{ order.total_price }}</div>
+            </div>
+            <hr>
+            <div class="order-products">
+                
+                <div class="order-details">
+                    {% for item in order.added_items.all %}
+                        <div class="product-details">
+                            <a href="{% url 'product_detail' item.product.pk %}">
+                                <img src="{{ item.product.image.url }}" alt="Product Image" class="product-image">
+                            </a>
+                            <div class="product-info">
+                                <div class="product-title">{{ item.product.title }}</div>
+                                <div>Size: {{ item.size }}</div>
+                                <div>Quantity: {{ item.quantity }}</div>
+                            </div>
                         </div>
-                    </div>
-                {% empty %}
-                    No products
-                {% endfor %}
-            </td>
-            <td data-label="Action">
+                    {% empty %}
+                        No products
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <div class="order-actions">
                 {% if order.order_status != order.ORDER_CANCELLED and order.order_status != order.ORDER_DELIVERED and order.order_status != order.ORDER_PROCESSED %}
-                    <form action="{% url 'cancel_order' order.id %}" method="post">
+                    <form action="{% url 'cancel_order' order.id %}" method="post" style="display:inline;">
                         {% csrf_token %}
                         <button type="submit" class="cancel-button">Cancel Order</button>
                     </form>
+                    <a href="{% url 'order_detail' order.id %}" class="details-button">Order Details</a>
                 {% elif order.order_status == order.ORDER_DELIVERED and order.is_within_return_period and not order.is_refund_requested %}
-                    <form action="{% url 'return_order' order.id %}" method="post">
+                    <form action="{% url 'return_order' order.id %}" method="post" style="display:inline;">
                         {% csrf_token %}
                         <button type="submit" class="return-button">Return Order</button>
                     </form>
+                    <a href="{% url 'order_detail' order.id %}" class="details-button">Order Details</a>
                 {% else %}
                     {% if not order.return_status %}
-                        <span>You can't cancel or return</span>
+                        <span>Cancellation or return of this item is restricted.</span>
                     {% else %}
                         <span><b>{% get_return_status order.return_status %}</b></span>
                     {% endif %}
                 {% endif %}
-            </td>
-        </tr>
+            </div>
+        </div>
         {% endfor %}
-        </tbody>
-    </table>
     {% else %}
-    <p>No orders found.</p>
+        <div class="no-orders">
+            <p>No orders found.</p>
+            <img src="{% static 'images/no_orders.jpeg' %}" alt="No Orders">
+            <a href="{% url 'men_products' %}" class="visit-products-link">Visit All Products</a>
+        </div>
     {% endif %}
 </div>
-
-<script>
-    // JavaScript code (if any)
-    // You can add JavaScript functionality here
-</script>
 
 </body>
 </html>

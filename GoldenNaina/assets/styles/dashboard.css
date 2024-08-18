@@ -127,3 +127,36 @@
       font-size: 14px;
   }
 }
+
+@media (min-width: 1200px) {
+  .dashboard {
+    padding: 60px 40px;
+  }
+
+  .profile {
+    padding: 50px;
+    margin-bottom: 40px;
+  }
+
+  .profile img {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 20px;
+  }
+
+  .profile p {
+    font-size: 20px;
+  }
+
+  .card {
+    padding: 35px;
+  }
+
+  .card h2 {
+    font-size: 26px;
+  }
+
+  .card p {
+    font-size: 18px;
+  }
+}

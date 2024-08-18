@@ -19,41 +19,38 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Roboto', sans-serif;
+        
         }
 
         body {
-            background: #f0f0f0; /* Light gray background */
-            color: #333; /* Dark gray text */
+            background: #fff;
+            color: #000;
             line-height: 1.6;
+            text-align: center;
         }
 
         .container {
             width: 90%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem 1rem; /* Smaller padding */
+            padding: 2rem 1rem;
         }
 
         .cont {
-            background: #fff; /* White background */
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 2rem;
+            margin-top: 2rem; /* Add this to create a gap */
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
             margin-bottom: 2rem;
         }
 
-        .title {
-            font-size: 2.5em;
-            color: #e94560;
-            margin-bottom: 1rem;
-            text-align: center; /* Centered title */
-        }
+        
 
         .stars {
             display: flex;
             justify-content: center;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         input.star {
@@ -61,16 +58,16 @@
         }
 
         label.star {
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: #0f3460;
-            transition: all 0.2s;
+            transition: all 0.3s;
             cursor: pointer;
         }
 
         input.star:checked~label.star:before {
             content: '\f005';
             color: #e94560;
-            transition: all 0.25s;
+            transition: all 0.3s;
         }
 
         input.star-5:checked~label.star:before {
@@ -82,7 +79,8 @@
         }
 
         label.star:hover {
-            transform: rotate(-15deg) scale(1.3);
+            transform: scale(1.3);
+            color: #ff6b6b;
         }
 
         label.star:before {
@@ -91,50 +89,68 @@
         }
 
         .rev-box {
-            margin-top: 1rem;
+            margin-top: 1.5rem;
         }
 
         textarea.review {
             width: 100%;
-            padding: 0.5rem;
+            padding: 1rem; /* Increased padding for better text visibility */
             border: 1px solid #0f3460;
-            border-radius: 4px;
+            border-radius: 6px;
             resize: vertical;
-            background-color: #f0f0f0; /* Light gray background */
-            color: #333; /* Dark gray text */
+            background-color: #f8f8f8;
+            color: #333;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+            min-height: 150px; /* Set a minimum height for better visibility */
+        }
+
+        textarea.review:focus {
+            border-color: #000;
+            outline: none;
         }
 
         button[type="submit"] {
-            background-color: #e94560;
+            background-color: #FF0080;
             color: white;
-            padding: 0.5rem 1rem;
+            padding: 0.8rem 1.5rem;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 1rem;
-            margin-top: 1rem;
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            transition: background-color 0.3s;
         }
 
         button[type="submit"]:hover {
-            background-color: #ff6b6b;
+            background-color: #000;
+            color: #fff;
         }
 
         .review-section {
-            margin-top: 2rem;
+            margin-top: 2.5rem;
+            margin-bottom: 2rem; /* Add this to create a gap */
+    
         }
 
         .review-item {
-            background: #fff; /* White background */
-            border: 1px solid #ddd; /* Light gray border */
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+        }
+
+        .review-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         .review-rating {
-            font-size: 1.2em;
-            color: #e94560;
+            font-size: 1.4rem;
+            color: #FF0080;
+            margin-bottom: 0.5rem;
         }
 
         .review-text {
@@ -142,30 +158,62 @@
         }
 
         .average-rating {
-            font-size: 1.2em;
+            font-size: 1.5rem;
             font-weight: bold;
-            margin-top: 1rem;
-            color: #e94560;
-            text-align: center; /* Centered average rating */
+            margin-top: 1.5rem;
+            color: #FF0080;
+            text-align: center;
         }
 
         @media screen and (max-width: 768px) {
             .container {
-                padding: 1rem; /* Adjusted padding for smaller screens */
+                padding: 1rem;
             }
 
             .cont {
-                padding: 1.5rem; /* Adjusted padding for smaller screens */
+                padding: 2rem;
             }
 
             .title {
-                font-size: 2em; /* Slightly smaller title on smaller screens */
+                font-size: 2rem;
             }
 
             .stars {
-                flex-direction: column; /* Stack stars vertically on smaller screens */
-                align-items: center; /* Center stars vertically on smaller screens */
+                flex-direction: column;
+                align-items: center;
             }
+
+            .review-item {
+                padding: 1.2rem;
+            }
+
+            textarea.review {
+                font-size: 1rem;
+                padding: 0.8rem;
+                min-height: 120px;
+            }
+        }
+
+        @media screen and (min-width: 769px) and (max-width: 1024px) {
+            textarea.review {
+                padding: 1rem;
+                min-height: 180px;
+            }
+
+            body {
+                text-align: left;
+            }
+        }
+
+        @media screen and (min-width: 1025px) {
+            textarea.review {
+                padding: 1.2rem;
+                min-height: 200px;
+            }
+            body {
+                text-align: left;
+            }
+            
         }
     </style>
 </head>
@@ -178,7 +226,7 @@
         </div>
 
         <div class="review-section">
-            <h2>Existing Reviews ({{ reviews|length }})</h2>
+            <h2>Existing Reviews ( {{ reviews|length }} )</h2>
             {% for r in reviews %}
             <div class="review-item">
                 <p><strong>{{ r.user.username|title }}</strong></p>
@@ -192,7 +240,6 @@
         </div>
 
         <div class="cont">
-            <h1 class="title">Write a Review</h1>
             <div class="stars">
                 <form id="reviewForm" method="POST" action="{% url 'ajax_add_review' product.id %}" class="row g-3">
                     {% csrf_token %}

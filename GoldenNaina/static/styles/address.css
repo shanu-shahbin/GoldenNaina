@@ -40,8 +40,13 @@ body {
   color: #fff;
 }
 
+.btn-address-add:hover {
+  text-decoration: none;
+  color: gold;
+}
+
 .address-list {
-  border: 1px solid #ddd;
+  border: 2px solid #000;
   border-radius: 5px;
   padding: 20px;
 }
@@ -78,18 +83,19 @@ body {
 }
 
 .btn-address-edit, .btn-address-delete {
-  background-color: #ddd;
+  background-color: #000;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
   font-size: 14px;
   text-decoration: none;
-  color: #000;
+  color: white;
 }
 
 .btn-address-edit:hover, .btn-address-delete:hover {
-  background-color: #ccc;
+  background-color: #000;
   text-decoration: none;
+  color: gold;
 }
 
 .text-muted {

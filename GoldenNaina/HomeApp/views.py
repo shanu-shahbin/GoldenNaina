@@ -21,3 +21,17 @@ def Social_links(request):
     }
     
     return render(request, 'footer.html', context)
+
+def terms_and_use(request):
+    return render(request, 'terms_of_use.html')
+
+def Privacy_policy(request):
+    return render(request, 'privacy_policy.html')
+
+def WhiteHat(request):
+    return render(request, 'whitehat.html')
+
+def careers(request):
+    careers = Career.objects.all()
+    recent_email = careers.last().email if careers.exists() else None 
+    return render(request, 'careers.html', {'careers': careers, 'recent_email': recent_email})

@@ -21,6 +21,7 @@ header h1 {
   font-size: 24px;
   font-weight: bold;
   color: #000;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 .container {
@@ -68,7 +69,7 @@ header h1 {
 
 .product-list .rating {
   position: absolute;
-  top: 54%;
+  top: 52%;
   left: 8px;
   font-size: 15px;
   color: gold;
@@ -218,12 +219,12 @@ header h1 {
 
   .product-list img {
     width: 100%;
-    height: 500px;
+    height: 400px;
     object-fit: fit;
   }
 
   .product-list .rating {
-    top: 70%;
+    top: 62%;
     left: 10px;
     font-size: 20px;
   }
@@ -275,12 +276,12 @@ header h1 {
 
   .product-list img {
     width: 100%;
-    height: 550px;
+    height: 400px;
     object-fit: fit;
   }
 
   .product-list .rating {
-    top: 67%;
+    top: 61%;
     left: 12px;
     font-size: 25px;
   }

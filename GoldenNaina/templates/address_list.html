@@ -13,7 +13,7 @@
             {% for address in addresses %}
             <div class="address-card">
                 <div class="address-details">
-                    <p class="address-info">{{ address.street_address }} <br> {{ address.city }}<br> {{ address.emirates }}, {{ address.zip_code }}, {{ address.country }}</p>
+                    <p class="address-info">{{ address.name }} <br> {{ address.street_address }} <br> {{ address.city }}<br> {{ address.emirates }}, {{ address.zip_code }}, {{ address.country }}</p>
                     <span class="">Mobile:&nbsp;+971&nbsp;{{ address.mobile_number }}</span><br>
                     <span class="address-type">{{ address.address_type }}</span>
                 </div>

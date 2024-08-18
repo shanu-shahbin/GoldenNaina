@@ -1,0 +1,31 @@
+{% extends 'partials/base.html' %}
+
+{% block title %}Careers{% endblock %}
+
+{% block content %}
+
+<div class="careers-section">
+  <h2>Careers</h2>
+  <div class="job-listing">
+    {% for job in careers %}
+    <div class="job-card">
+      <h3>{{ job.job_title }}</h3>
+      <p class="experience">Experience: {{ job.experience }} | {{ job.description }} </p>
+      <div class="footer-careers">
+        <p class="location">{{ job.location }}</p>
+        <p class="posted-date">Posted on {{ job.last_date_to_apply|date:"F j, Y" }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="job-status">
+  {% if recent_email %}
+      <div class="apply-through">Apply through {{ recent_email }}</div>
+  {% else %}
+      <div class="no-postings">No job postings yet.</div>
+  {% endif %}
+</div>
+
+{% endblock %}

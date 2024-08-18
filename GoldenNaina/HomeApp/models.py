@@ -75,3 +75,15 @@ class Company_address(models.Model):
     location = models.CharField(max_length=355)
     email = models.EmailField(max_length=54)
     phone_number = models.CharField(max_length=20)
+
+class Career(models.Model):
+    job_title = models.CharField(max_length=100)
+    location = models.CharField(max_length=100)
+    experience = models.CharField(max_length=100)
+    description = models.TextField()
+    email = models.EmailField()
+    date_posted = models.DateField(auto_now_add=True)
+    last_date_to_apply = models.DateField()
+
+    def __str__(self):
+        return self.job_title

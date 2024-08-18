@@ -20,7 +20,7 @@
     <section class="products">
         {% for product in product_chunks %}
         <div class="product-list">
-            <span class="discount-label">{{ product.get_percentage }}% OFF</span> <!-- Discount label -->
+            <span class="discount-label">{{ product.get_percentage }}% OFF</span> 
             <a href="{% url 'product_detail' product.id %}">
                 <img src="{{ product.image.url }}" alt="{{ product.title }}">
             </a>
@@ -30,10 +30,10 @@
                 {% endfor %}
             </div>
             <p class="brand">{{ product.title }}</p>
-            <p class="description">{{ product.description|truncatechars:25 }}</p>
+            <p class="description">{{ product.description|truncatechars:17 }}</p>
             <p class="price">
-                <span class="old-price">₹{{ product.price }}</span>
-                <big> ₹{{ product.discount_price }}</big>
+                <span class="old-price">AED {{ product.price }}</span>
+                <big> AED {{ product.discount_price }}</big>
             </p>
             {% if user.is_authenticated %}
                 <span class="wishlist-icon {% if product.pk in wishlist_products %}active{% endif %}" data-product-item="{{ product.pk }}"></span>
