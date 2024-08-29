@@ -4,13 +4,7 @@
 {% block content %}
   <div class="contact-us-container">
     <h1>Contact Us</h1>
-    {% if messages %}
-      <div class="contact-us-messages">
-        {% for message in messages %}
-          <p>{{ message }}</p>
-        {% endfor %}
-      </div>
-    {% endif %}
+  
     <form method="post" class="contact-us-form">
         {% csrf_token %}
         {{ form.as_p }}

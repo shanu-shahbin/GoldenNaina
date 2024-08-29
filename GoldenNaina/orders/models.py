@@ -1,12 +1,12 @@
 from django.db import models
 from Customers.models import Customer, Customer_Address
 from products.models import Product, ProductImages, Stock, Size
-from django.contrib import admin  # Import the admin module
+from django.contrib import admin  
 from django.utils import timezone
 from django.core.exceptions import ValidationError
 from datetime import timedelta
 
-#before
+
 class Order(models.Model):
     LIVE = 1
     DELETE = 0

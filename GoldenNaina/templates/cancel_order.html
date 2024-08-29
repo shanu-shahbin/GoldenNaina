@@ -5,14 +5,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cancel Order</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+        .container {
+            max-width: 100%;
+            padding: 0 15px;
+        }
+        @media (min-width: 576px) {
+            .container {
+                max-width: 540px;
+            }
+        }
+        @media (min-width: 768px) {
+            .container {
+                max-width: 600px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Cancel Order</h1>
-    <p>Are you sure you want to cancel the order {{ order.id }}?</p>
-    <form action="" method="post">
-        {% csrf_token %}
-        <button type="submit">Yes, cancel order</button>
-        <a href="{% url 'show_orders' %}">No, go back</a>
-    </form>
+    <div class="container">
+        <h1 class="mb-4">Cancel Order</h1>
+        <div class="card">
+            <div class="card-body">
+                <p class="card-text">Are you sure you want to cancel the order {{ order.id }}?</p>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="d-flex flex-column flex-sm-row justify-content-between">
+                        <button type="submit" class="btn btn-danger mb-2 mb-sm-0">Yes, cancel order</button>
+                        <a href="{% url 'orders' %}" class="btn btn-secondary">No, go back</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

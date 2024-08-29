@@ -18,13 +18,13 @@ class Customer(models.Model):
         return self.name
 
 class Customer_Address(models.Model):
-    name = models.CharField(max_length=255, null=True, blank=True)
+    name = models.CharField(max_length=255)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='addresses')
     street_address = models.CharField(max_length=255)  # P.O Box
     city = models.CharField(max_length=100, default='AbuDubai')  # Default to Dubai
     emirates = models.CharField(max_length=100, default='AbuDubai')  # Default to Dubai
     zip_code = models.CharField(max_length=20)  # Zip code
-    country = models.CharField(max_length=100, default='UAE')  
+    country = models.CharField(max_length=100, default='United Arab Emirates')  
     mobile_number = models.CharField(max_length=20)  # 971-(1)968565699
     address_type = models.CharField(max_length=10, choices=(('Home', 'Home'), ('Work', 'Work')), default='Home')
 
@@ -50,7 +50,7 @@ class ContactUs(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     full_name = models.CharField(max_length=100)
-    bio = models.TextField()
+    bio = models.TextField(null=True, blank=True)
     image = models.ImageField(upload_to='profiles/', null=True, blank=True)
     phone = models.CharField(max_length=20, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)

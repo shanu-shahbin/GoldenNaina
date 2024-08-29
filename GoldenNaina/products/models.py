@@ -5,6 +5,7 @@ from taggit.managers import TaggableManager
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.db.models import Avg
 from django.core.exceptions import ValidationError
+from django.urls import reverse
 
 
 
@@ -139,3 +140,17 @@ class Theme_model(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(max_length=100)
     created = models.DateTimeField(auto_now_add=True)
+
+
+class PopularSearch(models.Model):
+    name = models.CharField(max_length=255)
+    url = models.CharField(max_length=255, help_text="Enter the URL or name of the view to link to")
+
+    def __str__(self):
+        return self.name
+
+    def get_url(self):
+        try:
+            return reverse(self.url)
+        except:
+            return self.url  # Return the URL as is if it's not a view name

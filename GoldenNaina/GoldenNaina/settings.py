@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-zb(tk4yuenb+2x!-5^^s_plirr#mi^saiurs4vm2(^-mn%=*_-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -155,7 +155,7 @@ LOGIN_URL = 'Account'
 
 
 AUTO_LOGOUT = {
-    'IDLE_TIME': 8 * 60,  
+    'IDLE_TIME': 15 * 60,  
     'MESSAGE': 'The session has expired. Please login again to continue.',
 }
 
@@ -164,10 +164,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'shanushahbin11@gmail.com'
-EMAIL_HOST_PASSWORD = 'mbpm pdka ufjp zrfd'
-DEFAULT_FROM_EMAIL = 'shanushahbin11@gmail.com'
-ADMIN_EMAIL = 'shanushahbin22@gmail.com'  
+EMAIL_HOST_USER = 'goldennaina2020ad@gmail.com'
+EMAIL_HOST_PASSWORD = 'vyah gyjc flks oeyj'
+DEFAULT_FROM_EMAIL = 'goldennaina2020ad@gmail.com'
+ADMIN_EMAIL = 'goldennaina2020.manager@gmail.com'  
 
 try:
     server = smtplib.SMTP(EMAIL_HOST, EMAIL_PORT)

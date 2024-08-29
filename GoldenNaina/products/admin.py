@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Wishlist, ProductImages, ProductReview, Category, Theme_model, Size, Stock
+from .models import Product, Wishlist, ProductImages, ProductReview, Category, Theme_model, Size, Stock, PopularSearch
 
 
 class ProductImagesInline(admin.TabularInline):
@@ -42,6 +42,9 @@ class WishlistAdmin(admin.ModelAdmin):
 class SizeAdmin(admin.ModelAdmin):
     list_display = ('name',)  # Ensure this is a tuple
 
+class PopularSearchAdmin(admin.ModelAdmin):
+    list_display = ('name', 'url')
+
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Wishlist, WishlistAdmin)
 admin.site.register(ProductReview, ProductReviewAdmin)
@@ -49,4 +52,5 @@ admin.site.register(Category, CategoryAdmin)
 admin.site.register(Theme_model, Theme_modelAdmin)
 admin.site.register(Size, SizeAdmin)
 admin.site.register(Stock)
+admin.site.register(PopularSearch, PopularSearchAdmin)
 

@@ -240,10 +240,12 @@
                     <div class="section-title">Price Details ({{ cart.added_items.count }} Items)</div>
                     <p>Coupon Discount: AED&nbsp;<span id="coupon-discount">0.00</span></p>
                     <p>Platform Fee: FREE</p>
-                    <p>Shipping Fee: FREE</p>
+                    <p>Shipping Fee: AED&nbsp;<span id="shipping-fee">20.00</span></p>
                     <h3>Total Amount: AED&nbsp;<span id="total">{{ cart.get_total }}</span></h3>
                     <input type="hidden" name="total" id="hidden-total" value="{{ cart.get_total }}" />
                 </div>
+                
+                
                 <div class="apply-coupon">
                     <input type="text" name="code" placeholder="Enter Coupon Code" class="form-control" />
                     <button class="btn btn-primary" type="submit" name="apply_remove_coupon" id="apply-remove-coupon-button">Apply Coupon</button>
@@ -270,7 +272,8 @@
             const couponDiscountElement = document.getElementById('coupon-discount');
             const couponButton = document.getElementById('apply-remove-coupon-button');
             const couponInput = document.querySelector('input[name="code"]');
-    
+            const shippingFee = 20;
+        
             function updateTotals() {
                 let total = 0;
                 quantities.forEach(quantity => {
@@ -278,11 +281,19 @@
                     const quantityValue = parseInt(quantity.value);
                     total += price * quantityValue;
                 });
-    
+        
+                let shippingFee = 20; // Default shipping fee
+                if (total >= 200) {
+                    shippingFee = 0; // Make shipping free if total is 200 or more
+                }
+            
+                total += shippingFee;
+            
+                document.getElementById('shipping-fee').textContent = shippingFee.toFixed(2);
                 totalElement.textContent = total.toFixed(2);
                 hiddenTotalElement.value = total.toFixed(2);
             }
-    
+        
             function initEventListeners() {
                 quantities.forEach(quantity => {
                     quantity.addEventListener('input', function() {
@@ -292,7 +303,7 @@
                         updateTotals();
                     });
                 });
-    
+        
                 document.querySelectorAll('.quantity-increase').forEach(button => {
                     button.addEventListener('click', function() {
                         const quantityInput = this.previousElementSibling;
@@ -302,7 +313,7 @@
                         }
                     });
                 });
-    
+        
                 document.querySelectorAll('.quantity-decrease').forEach(button => {
                     button.addEventListener('click', function() {
                         const quantityInput = this.nextElementSibling;
@@ -312,22 +323,22 @@
                         }
                     });
                 });
-    
+        
                 couponButton.addEventListener('click', function(event) {
                     event.preventDefault();
                     const total = parseFloat(hiddenTotalElement.value);
                     let discount = 0;
                     const code = couponInput.value.trim();
-    
+        
                     if (this.textContent === 'Apply Coupon') {
-                        if (code === 'GoldenNaina10' && total >= 100) {
-                            discount = total * 0.10;
-                        } else if (code === 'GoldenNaina30' && total >= 500) {
-                            discount = total * 0.30;
-                        } else if (code === 'GoldenNaina50' && total >= 1000) {
-                            discount = total * 0.50;
+                        if (code === 'Golden50' && total >= 1000) {
+                            discount = total * 0.05;
+                        } else if (code === 'Golden100' && total >= 1500) {
+                            discount = total * 0.066666;
+                        } else if (code === 'Golden150' && total >= 2000) {
+                            discount = total * 0.075;
                         }
-    
+        
                         couponDiscountElement.textContent = discount.toFixed(2);
                         totalElement.textContent = (total - discount).toFixed(2);
                         hiddenTotalElement.value = (total - discount).toFixed(2);
@@ -338,12 +349,12 @@
                         this.textContent = 'Apply Coupon';
                     }
                 });
-    
+        
                 document.querySelectorAll('.move-to-wishlist').forEach(button => {
                     button.addEventListener('click', function() {
                         const product_id = this.getAttribute('data-product-item');
                         const $button = this;
-    
+        
                         $.ajax({
                             url: "{% url 'add-to-wishlist' %}",
                             data: { id: product_id },
@@ -366,35 +377,36 @@
                                 console.error("AJAX Error:", error);
                             }
                         });
-    
+        
                         this.classList.toggle('active');
                     });
                 });
             }
-    
+        
             function formatDate(date) {
                 const day = String(date.getDate()).padStart(2, '0');
                 const month = String(date.getMonth() + 1).padStart(2, '0');
                 const year = date.getFullYear();
                 return `${day}/${month}/${year}`;
             }
-    
+        
             function initializeDeliveryDates() {
                 const deliveryStartElements = document.querySelectorAll('[id^="delivery-start"]');
                 const deliveryEndElements = document.querySelectorAll('[id^="delivery-end"]');
                 const today = new Date();
                 const deliveryStartDate = formatDate(today);
                 const deliveryEndDate = formatDate(new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000));
-    
+        
                 deliveryStartElements.forEach(el => el.textContent = deliveryStartDate);
                 deliveryEndElements.forEach(el => el.textContent = deliveryEndDate);
             }
-    
+        
             // Initial update
             updateTotals();
             initEventListeners();
             initializeDeliveryDates();
         });
+        
     </script>
     
 </body>

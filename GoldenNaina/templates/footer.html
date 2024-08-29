@@ -5,12 +5,12 @@
           <h4>ONLINE SHOPPING</h4>
           <hr>
           <ul>
-              <li><a href="#">Men</a></li>
-              <li><a href="#">Women</a></li>
-              <li><a href="#">Watches</a></li>
-              <li><a href="#">Accessories</a></li>
-              <li><a href="#">Beauty</a></li>
-              <li><a href="#">Shoes</a></li>
+              <li><a href="{% url 'men_products' %}">Men</a></li>
+              <li><a href="{% url 'women_products' %}">Women</a></li>
+              <li><a href="{% url 'watch_products' %}">Watches</a></li>
+              <li><a href="{% url 'accessories_products' %}">Accessories</a></li>
+              <li><a href="{% url 'Beauty_products' %}">Beauty</a></li>
+              
           </ul>
       </div>
       <div class="footer-section">
@@ -30,7 +30,7 @@
           <h4>USEFUL LINKS</h4>
           <hr>
           <ul>
-              <li><a href="#">About Us</a></li>
+              <li><a href="{% url 'about_us' %}">About Us</a></li>
               <li><a href="{% url 'careers' %}">Careers</a></li>           
               <li><a href="{% url 'whitehat' %}">Whitehat</a></li>
           </ul>
@@ -75,9 +75,9 @@
   <div class="popular-searches">
       <h1>Popular Searches</h1>
       <ul>
-          <li><a href="#">Makeup</a></li>
-          <li><a href="#">Dresses For Girls</a></li>
-          <li><a href="#">T-Shirts</a></li>
+        {% for search in footer_popular_searches %}
+        <li><a href="{{ search.get_url }}">{{ search.name }}</a></li>
+    {% endfor %}
       </ul>
   </div>
   <div class="footer-note">

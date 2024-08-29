@@ -340,15 +340,9 @@
         <div class="row popular-searches">
             <h2>Popular Searches</h2>
             <div class="col-12">
-                <button class="btn btn-custom" onclick="location.href='{% url 'men_products' %}'">Men</button>
-                <button class="btn btn-custom" onclick="location.href='{% url 'women_products' %}'">Women</button>
-                <button class="btn btn-custom" onclick="location.href='{% url 'accessories_products' %}'">Popular 4</button>
-                <button class="btn btn-custom" onclick="location.href='{% url 'men_products' %}'">Men</button>
-                <button class="btn btn-custom" onclick="location.href='{% url 'women_products' %}'">Women</button>
-                <button class="btn btn-custom" onclick="location.href='{% url 'accessories_products' %}'">Popular 4</button>
-                <button class="btn btn-custom" onclick="location.href='{% url 'men_products' %}'">Men</button>
-                <button class="btn btn-custom" onclick="location.href='{% url 'women_products' %}'">Women</button>
-                <button class="btn btn-custom" onclick="location.href='{% url 'accessories_products' %}'">Popular 4</button>
+                {% for search in popular_searches %}
+                <button class="btn btn-custom" onclick="location.href='{{ search.get_url }}'">{{ search.name }}</button>
+            {% endfor %}
             </div>
         </div>
         {% if wishlist %}

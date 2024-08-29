@@ -79,10 +79,12 @@ def add_to_cart(request):
 
         product = get_object_or_404(Product, pk=product_id)
         
+        # Include size in the get_or_create to treat items with different sizes as distinct
         ordered_item, created = OrderedItem.objects.get_or_create(
             product=product,
             owner=cart_obj,
-            defaults={'quantity': quantity, 'size': size}
+            size=size,  # Include size here
+            defaults={'quantity': quantity}
         )
 
         if not created:
@@ -94,6 +96,7 @@ def add_to_cart(request):
             ordered_item.save()
 
     return redirect('cart')
+
 
 @login_required
 def checkout_process(request):
@@ -284,15 +287,15 @@ def payment_success(request, address_id, order_id):
     subject_customer = 'Order Confirmation'
     message_customer = f'Thank you for your order!\n\nOrder ID: {order.id}\n\nProducts:\n'
     for item in order.added_items.all():
-        message_customer += f'- {item.product.title} ({item.size}): {item.quantity} x ${item.product.discount_price}\n'
-    message_customer += f'\nTotal: ${order.total_price}\n\nDelivery Address:\n{address_details}'
+        message_customer += f'- {item.product.title} ({item.size}): {item.quantity} x AED {item.product.discount_price}\n'
+    message_customer += f'\nTotal: AED {order.total_price}\n\nDelivery Address:\n{address_details}'
 
     # Prepare email content for admin
     subject_admin = 'New Order Received'
     message_admin = f'New order received!\n\nOrder ID: {order.id}\n\nProducts:\n'
     for item in order.added_items.all():
-        message_admin += f'- {item.product.title} ({item.size}): {item.quantity} x ${item.product.discount_price}\n'
-    message_admin += f'\nTotal: ${order.total_price}\n\nCustomer Details:\n'
+        message_admin += f'- {item.product.title} ({ item.size }): {item.quantity} x AED {item.product.discount_price}\n'
+    message_admin += f'\nTotal: AED {order.total_price}\n\nCustomer Details:\n'
     message_admin += f'Email: {customer.user.email}\n'
     message_admin += f'Address: {address_details}\n'
     message_admin += f'Payment Method: {order.payment_method}\n'
@@ -304,9 +307,9 @@ def payment_success(request, address_id, order_id):
     else:
         message_admin += 'No Coupons Applied.\n'
 
-    from_email = 'shanushahbin11@gmail.com'
+    from_email = 'goldennaina2020ad@gmail.com'
     recipient_list_customer = [user.email]
-    recipient_list_admin = ['shanushahbin22@gmail.com']  # Replace with your admin email
+    recipient_list_admin = ['goldennaina2020.manager@gmail.com']  # Replace with your admin email
 
     # Send email to customer
     send_mail(subject_customer, message_customer, from_email, recipient_list_customer, fail_silently=False)
@@ -444,9 +447,9 @@ def refund_approved(request):
         message_admin += 'IFSC Code: {}\n'.format(order.ifsc_code or 'N/A')
         message_admin += f'Customer Email: {customer.user.email}\n'
 
-    from_email = 'shanushahbin11@gmail.com'
+    from_email = 'goldennaina2020ad@gmail.com'
     recipient_list_customer = [user.email]
-    recipient_list_admin = ['shanushahbin22@gmail.com']  # Replace with your admin email
+    recipient_list_admin = ['goldennaina2020.manager@gmail.com']  # Replace with your admin email
 
     # Send email to customer
     send_mail(subject_customer, message_customer, from_email, recipient_list_customer, fail_silently=False)

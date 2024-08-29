@@ -4,7 +4,7 @@
 <p>Order confirmed</p>
 <p>Thank you for your order! Here are the details:</p>
 <p>Order ID: {{ order.id }}</p>
-<p>Total: ${{ order.total_price|floatformat:2 }}</p>
+<p>Total: AED {{ order.total_price|floatformat:2 }}</p>
 <p>Status: {{ order.get_order_status_display }}</p>
 <h2>Items:</h2>
 <ul>

@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
-from .models import Product, Category, Theme_model, ProductReview, Wishlist, ProductImages, Stock
+from .models import Product, Category, Theme_model, ProductReview, Wishlist, ProductImages, Stock, PopularSearch
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from taggit.models import Tag
 from django.db.models import Avg
@@ -9,6 +9,7 @@ from django.http import JsonResponse
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.views.generic import DetailView
+
 
 def Products(request):
     featured_products = Product.objects.order_by('priority')[:4]
@@ -29,7 +30,7 @@ def Products(request):
 
     }
     return render(request, 'index.html', context) 
-#video 24 after 15min 
+
 
 def ProductList(request):
     page = request.GET.get('page', 1)
@@ -277,6 +278,7 @@ def ajax_add_review(request, pk):
     })
 
 def search(request):
+    popular_searches = PopularSearch.objects.all()
     if request.user.is_authenticated:
         wishlist = Wishlist.objects.filter(user=request.user)[:3]
     else:
@@ -294,6 +296,7 @@ def search(request):
         'products': products,
         'query': query,
         'wishlist': wishlist,
+        'popular_searches': popular_searches,
     }
     return render(request, 'search.html', context)
 

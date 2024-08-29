@@ -1,0 +1,61 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Page Not Found</title>
+      <style>
+          body {
+              font-family: Arial, sans-serif;
+              background-color: #f0f0f0;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 100vh;
+              margin: 0;
+          }
+          .container {
+              text-align: center;
+              background-color: white;
+              padding: 2rem;
+              border-radius: 10px;
+              box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+              max-width: 90%;
+              width: 400px;
+          }
+          h1 {
+              color: #e74c3c;
+              font-size: 2rem;
+          }
+          p {
+              color: #333;
+              font-size: 1rem;
+          }
+          a {
+              color: #3498db;
+              text-decoration: none;
+          }
+          a:hover {
+              text-decoration: underline;
+          }
+          @media (max-width: 480px) {
+              .container {
+                  padding: 1rem;
+              }
+              h1 {
+                  font-size: 1.5rem;
+              }
+              p {
+                  font-size: 0.9rem;
+              }
+          }
+      </style>
+  </head>
+  <body>
+      <div class="container">
+          <h1>404 - Page Not Found</h1>
+          <p>Sorry, the page you are looking for does not exist.</p>
+          <p><a href="{% url 'Products' %}">Go back to the homepage</a></p>
+      </div>
+  </body>
+  </html>

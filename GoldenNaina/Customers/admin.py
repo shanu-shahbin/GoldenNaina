@@ -3,7 +3,7 @@ from .models import Customer, Customer_Address, ContactUs, Profile
 
 
 class CustomerAdmin(admin.ModelAdmin):
-    list_display = ('name',)  # Corrected to tuple
+    list_display = ('name',)  
     search_fields = ('name', 'phone')
 
 

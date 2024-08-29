@@ -40,6 +40,9 @@
             cursor: pointer;
             font-size: 14px;
             text-decoration: none;
+            display: inline-block;
+            width: auto;
+            text-align: center;
         }
 
         .btn-address-add a {
@@ -91,6 +94,9 @@
             cursor: pointer;
             font-size: 14px;
             color: #ffd700;
+            display: inline-block;
+            width: auto;
+            text-align: center;
         }
 
         .btn-address-edit:hover, .btn-address-delete:hover {
@@ -111,6 +117,9 @@
             font-size: 14px;
             text-decoration: none;
             margin-top: 20px;
+            display: inline-block;
+            width: auto;
+            text-align: center;
         }
 
         button[type="submit"]:hover {
@@ -134,6 +143,11 @@
                 width: 100%;
                 text-align: center;
             }
+
+            .btn-address-add, button[type="submit"] {
+                width: 100%;
+                text-align: center;
+            }
         }
 
         @media (max-width: 480px) {
@@ -142,8 +156,8 @@
                 padding: 10px;
             }
 
-            .btn-address-add {
-                width: 100%;
+            .btn-address-add, .btn-address-edit, .btn-address-delete, button[type="submit"] {
+                width: 75%;
                 text-align: center;
             }
         }
@@ -152,7 +166,7 @@
 <body>
     <div class="container">
         <h1>Order Overview</h1>
-        <h2>Total: ${{ order.total_price }}</h2>
+        <h2>Total: AED {{ order.total_price }}</h2>
         <h1>Payment</h1>
 
         <!-- Display the form only for selecting payment method and address -->
@@ -171,7 +185,7 @@
                                 <input type="radio" name="address_id" value="{{ address.id }}" id="address_{{ address.id }}" required>
                                 <label for="address_{{ address.id }}">
                                     <div class="address-details">
-                                        <p class="address-info">{{ address.name }} <br>{{ address.street_address }} <br> {{ address.city }}<br> {{ address.state }}, {{ address.postal_code }}, {{ address.country }}</p>
+                                        <p class="address-info">{{ address.name }} <br> {{ address.street_address }} <br> {{ address.city }}<br> {{ address.emirates }}, {{ address.zip_code }}<br> {{ address.country }}</p>
                                         <span>Mobile: +971 {{ address.mobile_number }}</span><br>
                                         <span class="address-type">{{ address.address_type }}</span>
                                     </div>
@@ -189,8 +203,6 @@
             </div>
 
             <h3>Select Payment Method:</h3>
-            <input type="radio" name="payment_method" value="paypal" id="paypal" checked>
-            <label for="paypal">PayPal</label><br>
             <input type="radio" name="payment_method" value="cod" id="cod">
             <label for="cod">Cash on Delivery</label><br>
 

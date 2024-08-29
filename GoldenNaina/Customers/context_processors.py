@@ -1,5 +1,4 @@
 
-
 from .models import Customer_Address
 
 def customer_addresses(request):
