@@ -46,7 +46,7 @@ def ProductList(request):
     else:
         product_list = product_list.order_by('-priority')
     
-    product_paginator = Paginator(product_list, 4)  # Show 4 products per page.
+    product_paginator = Paginator(product_list, 20)  # Show 4 products per page.
     product_list = product_paginator.get_page(page)
     
     context = {
@@ -97,7 +97,7 @@ def womens(request):
     else:
         women_products = Product.objects.filter(category=2)
     
-    paginator = Paginator(women_products, 4)  # Show 4 products per page.
+    paginator = Paginator(women_products, 16)  
     women_products = paginator.get_page(page)
     
     context = {
@@ -117,7 +117,7 @@ def mens(request):
     else:
         men_products = Product.objects.filter(category=1)
     
-    paginator = Paginator(men_products, 4)  # Show 4 products per page.
+    paginator = Paginator(men_products, 16)  # Show 4 products per page.
     men_products = paginator.get_page(page)
     
     context = {
@@ -138,7 +138,7 @@ def watches(request):
     else:
         watch_products = Product.objects.filter(category=3)
 
-    paginator = Paginator(watch_products, 8)  # Show 4 products per page.
+    paginator = Paginator(watch_products, 16)  # Show 4 products per page.
     watch_products = paginator.get_page(page)
 
     context = {
@@ -158,7 +158,7 @@ def accessories(request):
     else:
         accessories_products = Product.objects.filter(category=4)
 
-    paginator = Paginator(accessories_products, 8)  # Show 4 products per page.
+    paginator = Paginator(accessories_products, 16)  # Show 4 products per page.
     accessories_products = paginator.get_page(page)
 
     context = {
@@ -178,7 +178,7 @@ def Beauty(request):
     else:
         Beauty_products = Product.objects.filter(category=5)
 
-    paginator = Paginator(Beauty_products, 8)  # Show 4 products per page.
+    paginator = Paginator(Beauty_products, 16)  # Show 4 products per page.
     Beauty_products = paginator.get_page(page)
 
     context = {
@@ -206,7 +206,7 @@ class CategoryDetailView(DetailView):
         else:
             products = self.object.product_set.all()
         
-        paginator = Paginator(products, 4)  # Show 4 products per page.
+        paginator = Paginator(products, 16)  # Show 4 products per page.
         products = paginator.get_page(page)
         
         context['products'] = products
