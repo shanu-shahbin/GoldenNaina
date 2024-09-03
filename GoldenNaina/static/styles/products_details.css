@@ -61,6 +61,16 @@ body {
   width: 20px;
 }
 
+.share-btn {
+  background-color: #fff;
+  color: #1083ff;
+  border: none;
+  font-size: 18px;
+}
+.share-options{
+  text-align: right;
+}
+
 .btn-add-to-cart {
   background-color: #000;
   color: white;
@@ -188,6 +198,9 @@ body {
   .buttons-row {
     gap: 40px;
   }
+  .share-options{
+    text-align: right;
+  }
 }
 
 @media (max-width: 576px) {
@@ -213,6 +226,10 @@ body {
 
   .buttons-row {
     gap: 18px;
+  }
+
+  .share-options{
+    text-align: center;
   }
 }
 

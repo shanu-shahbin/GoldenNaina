@@ -8,7 +8,7 @@ urlpatterns = [
     
   path('', views.Products, name='Products'),
   path('product_list', views.ProductList, name='ProductList'),
-  path('product_detail/<pk>', views.Product_Detail, name="product_detail"),
+  path('product/<int:pk>/', views.Product_Detail, name="product_detail"),
 
   # navbar categories paths
   
