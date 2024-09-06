@@ -17,7 +17,5 @@ urlpatterns = [
 
 
 
-def custom_404_view(request, exception):
-    return render(request, '404.html', status=404)
-
-handler404 = custom_404_view
+handler404 = views.custom_404_view
+handler500 = views.custom_500_view
