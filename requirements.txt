@@ -1,0 +1,13 @@
+django
+mysqlclient
+pillow
+djangorestframework
+django-filter
+django-jazzmin
+django-auto-logout
+django-taggit
+django-ckeditor
+asgiref==3.8.1
+gunicorn==21.2.0
+psycopg2-binary==2.9.9
+sqlparse==0.4.4
