@@ -14,3 +14,4 @@ sqlparse==0.4.4
 boto3
 django-storages
 django-paypal
+whitenoise
