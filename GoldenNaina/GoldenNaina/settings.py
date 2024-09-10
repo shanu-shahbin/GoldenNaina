@@ -79,13 +79,14 @@ WSGI_APPLICATION = 'GoldenNaina.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'goldennaina_8',
-        'USER': 'root',
-        'PASSWORD': ''
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'goldennaina',
+        'USER': 'goldennaina',
+        'PASSWORD': 'goldennaina',
+        'HOST': 'goldennaina.cd6yi4yci4yn.us-west-2.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
