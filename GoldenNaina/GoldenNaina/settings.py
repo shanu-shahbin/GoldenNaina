@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 
-SECRET_KEY = 'django-insecure-zb(tk4yuenb+2x!-5^^s_plirr#mi^saiurs4vm2(^-mn%=*_-'
+SECRET_KEY = 'your Django secret key'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -80,10 +80,10 @@ WSGI_APPLICATION = 'GoldenNaina.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'goldennaina',
-        'USER': 'goldennaina',
-        'PASSWORD': 'goldennaina',
-        'HOST': 'goldennaina.cd6yi4yci4yn.us-west-2.rds.amazonaws.com',
+        'NAME': 'your aws database name ',
+        'USER': 'your aws database username',
+        'PASSWORD': '',
+        'HOST': 'replace your host',
         'PORT': '5432',
     }
 }
@@ -163,14 +163,14 @@ AUTO_LOGOUT = {
 }
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = ''
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'goldennaina2020ad@gmail.com'
-EMAIL_HOST_PASSWORD = 'vyah gyjc flks oeyj'
-DEFAULT_FROM_EMAIL = 'goldennaina2020ad@gmail.com'
-ADMIN_EMAIL = 'goldennaina2020.manager@gmail.com'  
+EMAIL_HOST_USER = 'host email'
+EMAIL_HOST_PASSWORD = ''
+DEFAULT_FROM_EMAIL = ''
+ADMIN_EMAIL = ''  
 
 try:
     server = smtplib.SMTP(EMAIL_HOST, EMAIL_PORT)
@@ -183,5 +183,5 @@ except Exception as e:
 
 
 
-PAYPAL_RECEIVER_EMAIL = 'sb-jchvu14723533@business.example.com' 
+PAYPAL_RECEIVER_EMAIL = 'yourpaypal@business.example.com' 
 PAYPAL_TEST = True
