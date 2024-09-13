@@ -1,9 +1,0 @@
-django
-mysqlclient
-pillow
-djangorestframework
-django-filter
-django-jazzmin
-django-auto-logout
-django-taggit
-django-ckeditor
