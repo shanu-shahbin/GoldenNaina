@@ -14,7 +14,7 @@ SECRET_KEY = 'your Django secret key'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['Your Domain name']
 
 
 # Application definition
@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'paypal.standard.ipn',
     'whitenoise.runserver_nostatic',
+    'mptt',
 ]
 
 MIDDLEWARE = [
