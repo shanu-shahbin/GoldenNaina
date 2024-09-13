@@ -447,9 +447,9 @@ def refund_approved(request):
         message_admin += 'IFSC Code: {}\n'.format(order.ifsc_code or 'N/A')
         message_admin += f'Customer Email: {customer.user.email}\n'
 
-    from_email = 'goldennaina2020ad@gmail.com'
+    from_email = 'admin host email'
     recipient_list_customer = [user.email]
-    recipient_list_admin = ['goldennaina2020.manager@gmail.com']  # Replace with your admin email
+    recipient_list_admin = ['admin email']  # Replace with your admin email
 
     # Send email to customer
     send_mail(subject_customer, message_customer, from_email, recipient_list_customer, fail_silently=False)
